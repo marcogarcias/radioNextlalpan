@@ -12,4 +12,3 @@ galeriaDinamica01();
 <?php
 echo finalPagina();
 ?>
-.
