@@ -1,0 +1,847 @@
+html{
+height: 100%;
+}
+
+body{
+	/*background: #eee url(../img/varios/logoGFondo03.png);*/
+	background: #e0f9d1;
+	/*cursor: url(../img/varios/logoGCursor01.cur), url(../img/varios/logoGCursor01.ani), url(../img/varios/logoGCursor01.gif), auto;*/
+	font-size: 16px;
+	height: 100%;
+}
+
+#contenedor{
+	min-height: 100%;
+	height: 100%;
+	margin: 0 auto -70px;
+}
+
+/* ****************************
+****** TABLA CONTENEDORA ******
+**************************** */
+.tablaContenedor{
+	margin: 0 auto;
+	width: 990px; 
+}
+
+/* *******************
+****** CABECERA ******
+******************* */
+
+#cabeceraLogoG{
+	height: 100px;
+	margin: 25px 25px;
+	position: absolute;
+	top: 25px;
+	width: 100px;
+	z-index: 99;
+}
+
+#cabeceraBanner{
+	background-image: url('../public/img/cabecera/cabecera01.jpg');
+	height: 220px;
+	width: 990px;
+}
+
+#cabeceraBanner div.reproductor{
+	/*border: 1px solid #000;*/
+	float: right;
+	/*width: 315px;*/ /* radionomy */
+	width: 500px; /* old */
+}
+
+/* *******************
+****** CARRUSEL ******
+******************* */
+#sliderV1Portada{
+	position: absolute;
+	z-index: 98;
+}
+#sliderV1{
+	height: 225px;
+}
+#sliderV1 img{
+	position: absolute;
+	/*display: none;*/
+}
+
+
+/* **************************
+****** MENU HORIZONTAL ******
+************************** */
+
+.menu{
+	border: 2px solid #05a650;
+	border-radius: 10px;
+	background: #fff; /* Old browsers */
+	color: #000;
+	font-size: 0.75em;
+	font-weight: bold;
+	height: 30px;
+	margin: 5px 0;
+	vertical-align: middle;
+}
+
+.menu ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.menu li{
+	float: left;
+}
+
+.menu ul ul{
+	position: absolute;
+	display: none;
+}
+
+.menu li li a{
+	background: #fff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #fff 1%, #ffffff 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#fff), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #fff 1%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #fff 1%,#ffffff 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #fff 1%,#ffffff 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #fff 1%,#ffffff 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+.menu li li{
+	float: none;
+}
+
+.menu li li ul{
+	margin-top: -30px;
+	margin-left: 130px;
+}
+
+.seccion{
+	color: #000;
+	display: block;
+	height: 22px;
+	margin: 0px;
+	padding: 5px 0;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	width: 120px;
+}
+
+.seccion:hover{
+	background: #00a54f;
+}
+
+.seccionA{
+	color: #f00;
+	display: block;
+	height: 22px;
+	margin: 0px;
+	padding: 5px 0;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	width: 120px;
+}
+
+/* *******************************
+****** MENU LATERAL BANNERS ******
+******************************* */
+
+#menuLateral{
+	margin: auto;
+	text-align: center;
+	vertical-align: top;
+}
+
+#fb-comments_{
+	background: #fff;
+}
+
+#menuLateral img, #menuLateral a, #menuLateral table{
+
+	margin: auto;
+	text-align: center;
+	vertical-align: top;
+}
+
+#menuLateral img{
+	border: 1px solid #05a650;
+}
+
+.subMenuDesp { 
+  padding: 0px;
+  margin: -7px 0px;
+  list-style:none;
+}
+
+.subMenuDesp li { 
+  /*float:left; 
+  background-image:url(nav_li_bg.png); 
+  background-repeat:no-repeat; 
+  background-position:right;*/ 
+}
+
+.subMenuDesp li a { 
+  display:block; 
+  padding:7px 10px; 
+  text-decoration:none; 
+  color:#05a650; 
+  font-weight:bold; 
+}
+
+.subMenuDesp li a:hover { 
+  color:#f00; 
+}
+/* Submenu 1 */
+.subMenuDesp ul.submenu1 { 
+  border: 2px solid #05a650;
+  border-radius: 10px; 
+  padding:5px; 
+  position:absolute;
+  list-style:none; 
+  background: #ccfccd;
+  margin-left:-180px; 
+  margin-top:-110px;
+  z-index: 102;
+}
+
+.subMenuDesp ul.submenu1 li { 
+  width:180px;
+}
+.subMenuDesp ul.submenu1 a{ 
+  border-bottom:1px solid #05a650; 
+}
+/* Subsubmenu 2 */
+.subMenuDesp ul.submenu2 { 
+  border:1px solid #05a650; 
+  padding:5px; 
+  position:absolute; 
+  list-style:none; 
+  background:#ccfccd; 
+  margin-left:-210px; 
+  margin-top:-170px;
+}
+
+.subMenuDesp ul.submenu2 li { 
+  min-width:200px;
+}
+
+.subMenuDesp ul.submenu2 li.title { 
+  color: #047537;
+  font-size: 10px;
+  font-weight:bold;
+}
+
+.subMenuDesp ul.submenu2 a{ 
+  border-bottom:1px solid #05a650; 
+}
+/* Subsubmenu 3 */
+.subMenuDesp ul.submenu3 { 
+  border:1px solid #05a650; 
+  padding:5px; 
+  position:absolute; 
+  list-style:none; 
+  background:#ccfccd; 
+  margin-left:-210px; 
+  margin-top:-75px;
+}
+
+.subMenuDesp ul.submenu3 li { 
+  min-width:200px;
+}
+
+.subMenuDesp ul.submenu3 a{ 
+  border-bottom:1px solid #05a650; 
+}
+
+/* Subsubmenu 4 */
+.subMenuDesp ul.submenu4 { 
+  border:1px solid #05a650; 
+  padding:5px; 
+  position:absolute; 
+  list-style:none; 
+  background:#ccfccd; 
+  margin-left:-210px; 
+  margin-top:-110px;
+}
+
+.subMenuDesp ul.submenu4 li { 
+  min-width:200px;
+}
+
+.subMenuDesp ul.submenu4 a{ 
+  border-bottom:1px solid #05a650; 
+}
+
+/*
+.conacTooltip{
+	background: #ccfccd;
+	border: 2px solid #05a650;
+	border-radius: 10px; 
+	display: none;
+	left: 955px; 
+	position: absolute;
+	text-align: left;
+	top: 500px;
+	width: 200px;
+	z-index: 99;
+}
+
+.depMunTooltip{
+	background: #ccfccd;
+	border: 2px solid #05a650;
+	border-radius: 10px; 
+	display: none;
+	left: -180px;
+	position: relative;
+	text-align: left;
+	top: -95px;
+	width: 200px;
+}
+
+.depMunTooltip a, .conacTooltip a{
+	color: #05a650;
+	font-weight: bold;
+	display: block;
+	padding-bottom: 5px; 
+	padding-top: 5px;
+	text-align: left;
+	text-decoration: none;
+}
+
+.depMunTooltip a:nth-child(4), .depMunTooltip a:nth-child(5), .depMunTooltip a:nth-child(6){
+	display: none;
+	padding: 10px 0;
+}
+
+.depMunTooltip a:hover{
+	color: #f00;
+	text-decoration: underline;
+}
+
+#depMunModal{
+	background: #eee;
+
+}
+
+#depMunModCabecera{
+	background: url(../img/partes/cabecera02.jpg);
+	color: #fff;
+	font-size: 40px;
+	font-weight: bold;
+	height: 121px;
+	letter-spacing: 10px;
+	text-align: left;
+	text-shadow: 5px 5px 3px #000;
+	width: 960px;
+}
+
+#depMunModCabecera span{
+	display: block;
+	margin-left: 100px;
+}
+*/
+/* ******************************
+****** GALERIA DINAMICA 01 ******
+****************************** */
+#galeriaDinamica01{
+	border-radius: 25px;
+	background: #ccc url("../img/varios/turron.png"); /* para la version 0.0 color gris */
+	/*background: #9f9 url("../img/varios/turron.png");*/ /* para la version 0.1 color verde */
+	color: #fff;
+	padding: 25px;
+	width: 725px;
+}
+
+#galeriaDinamica01Contenedor{
+	height: 370px;
+	margin: 0 auto;
+	width: 570px;
+}
+
+#galeriaDinamica01Contenedor div{
+	position: absolute;
+}
+
+
+.galeriaDinamica01Img{
+	/*background: #666; */ /* para la version 0.0 color gris */
+	background: #20bc95; /* para la version 0.1 color verde */
+	padding: 10px;
+	position: static;
+	text-align: center;
+	width: 550px;
+}
+
+.galeriaDinamica01Footer{
+	/*background: #333; */ /* para la version 0.0 color gris */
+	background: rgba(51, 51, 51, 0.7); 
+	color: #fff;
+	font-size: 0.9em; 
+	height: 60px;
+	letter-spacing: 0.1em;
+	padding: 10px;
+	position: static;
+	top: 290px;
+	width: 550px;
+}
+
+#galDinNavegacion{
+	/*background: #aaa url(../img/varios/lineaDiagonal02.png);*/ /* para la version 0.0 color gris */
+	/*border: 3px solid #666;*/ /* para la version 0.0 color gris */
+	background: #20bc95 url(../img/varios/lineaDiagonal01.png); /* para la version 0.1 color verde */
+	border: 3px solid #05a650; /* para la version 0.1 color verde */
+	border-radius: 10px;
+	margin: 5px 80px;
+	padding: 10px;
+	width: 450px;
+}
+
+#galDinNavegacion div{
+	background: url(../img/varios/boton01.png);
+	display: inline-block;
+	height: 21px;
+	margin: 5px;
+	width: 21px;
+}
+
+#galDinNavegacion div:hover{
+	cursor: pointer;
+}
+
+/* *********************************
+****** CONTENIDO DE SECCIONES ******
+********************************* */
+
+.contenido{
+	background: #fbe921;  /* para la version 0.0 color rojo */
+	border: 5px solid #959d15; /* para la version 0.0 color rojo */
+	/*background: #9f9 url("../img/varios/lineaDiagonal02.png");*/ /* para la version 0.1 color verde */
+	/*border: 5px solid #05a650;*/ /* para la version 0.1 color verde */
+	border-radius: 25px;
+	margin: 10px 0;
+	padding: 25px;
+	width: 77%;
+}
+
+#contenido h2{
+	background: #00d368 url("../img/varios/fondo01.jpg");
+	border: 3px solid #002d14;
+	border-radius: 10px 10px 0 0;
+	box-shadow: 15px 15px 15px #410000;
+	color: #002d14;
+	margin: 15px;
+	padding: 10px;
+	width: 50%;
+}
+
+.contenidoSeccionDiv{
+	background: #fff url("../img/varios/lineaDiagonal01.png");
+	border: 1px solid #666;
+	margin: 0;
+	padding: 10px;
+}
+
+.contenidoSeccionDiv hr{
+	color: #999;
+	width: 80%;
+}
+
+/* ********************************
+****** SECCION "PRESIDENCIA" ******
+******************************** */
+.presicencia01{
+	padding: 20px;
+	text-align: center;
+}
+
+.presicencia01 img{
+	box-shadow: 10px 10px 10px #333;
+}
+
+
+.fichaDatos{
+	/*background: #eee;*/ /* para la version 0.0 color gris */
+	/*border: 3px solid #999;*/ /* para la version 0.0 color gris */
+	background: #efe; /* para la version 0.1 color verde */
+	border: 3px solid #05a650; /* para la version 0.1 color verde */
+	/*background: #fee;*/ /* para la version 0.2 color rojo */
+	/*border: 3px solid #a51405;*/ /* para la version 0.2 color rojo */
+	border-radius: 15px;
+	box-shadow: 10px 10px 10px #333;
+	padding: 10px 0;
+	margin: 20px auto;
+	width: 80%;
+}
+
+.fichaDatos:hover{
+	/*background: #efe;*/ /* para la version 0.0 color gris */
+	background: #fee; /* para la version 0.1 color verde */
+	border: 3px solid #a51405; /* para la version 0.1 color verde */
+	/*background: #efe;*/ /* para la version 0.2 color rojo */
+	/*border: 3px solid #05a650;*/ /* para la version 0.2 color rojo */
+}
+
+.fichaDatos span{
+	display: block;
+	font-weight: bold;
+}
+
+/* ********************************
+****** SECCION "DEPENDENCIA" ******
+******************************** */
+.direccionesTable{
+	/*background: #999;*/ /* para la version 0.0 color gris */
+	background: #05a650; /* para la version 0.1 color verde */
+	border-radius: 20px 20px 0 0; 
+	font-size: 14;
+}
+
+.direccionesTable td{
+	/*background: #eee;*/ /* para la version 0.0 color gris */
+	background: #efe; /* para la version 0.1 color verde */
+	text-align: left;
+}
+
+.direccionesTable td:hover{
+	/*background: #efe;*/ /* para la version 0.0 color gris */
+	background: #fee; /* para la version 0.1 color verde */
+}
+
+/* **********************************
+****** SECCION "TRANSPARENCIA" ******
+********************************** */
+.transparenciaTable{
+	background: #05a650; /* para la version 0.1 color verde */
+}
+
+.transparenciaTable td:first-child{
+	/*background: #eee;*/ /* para la version 0.0 color gris */
+	background: #efe; /* para la version 0.1 color verde */
+	width: 150px;
+}
+
+.transparenciaTable td{
+	/*background: #ddd;*/ /* para la version 0.0 color gris */
+	background: #ccfccd; /* para la version 0.1 color verde */
+	width: 80%;
+}
+
+.fracciones p{
+	font-weight: bold;
+}
+
+.fracciones p:hover{
+	color: #a51405; /* para la version 0.1 color verde */
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.fracciones a{
+	color: #000; /* para la version 0.0 color gris */
+	/*color: #05a650;*/ /* para la version 0.1 color verde */
+	display: block;
+	text-decoration: none;
+}
+
+.fracciones a:hover{
+	/*color: #333;*/ /* para la version 0.0 color gris */
+	color: #a51405; /* para la version 0.1 color verde */
+	text-decoration: underline;
+}
+
+.contenidoFraccion p{
+	margin: 0;
+	padding: 0;
+}
+
+.contenidoFraccion p:hover{
+	cursor: default;
+	text-decoration: none;
+}
+
+.contenidoFraccion{
+	/*background: #eee;*/ /* para la version 0.0 color gris */
+	/*border: 2px solid #000; */ /* para la version 0.0 color gris */
+	background: #efe; /* para la version 0.1 color verde */
+	border: 2px solid #05a650; /* para la version 0.1 color verde */
+	display: none;
+	height: 205px;
+	overflow: auto;
+	padding: 5px 5px 5px 40px;
+	position: absolute;
+	left: 200px;
+}
+
+/* ********************************
+****** SECCION "COMUNICADOS" ******
+********************************* */
+.comunicados{
+	cursor: pointer;
+}
+
+.datosComunicado{
+	background: #eee;
+	border: 3px solid #999;
+	border-radius: 15px;
+	padding: 15px;
+}
+
+.datosComunicado hr{
+	color: #333;
+	width: 95%;
+}
+
+.datosComunicadoDescriop01{
+	font-style: italic;
+	margin: 10px;
+}
+
+.datosComunicadoDescriop02{
+	font-size: 20px;
+	margin: 10px;
+}
+
+.datosComunicadoBoton{
+	text-align: center;
+}
+
+/* ********************************
+****** SECCION "COMUNICADES" ******
+********************************* */
+
+.fichaDatos02{
+	/*background: #eee;*/ /* para la version 0.0 color gris */
+	/*border: 3px solid #999;*/ /* para la version 0.0 color gris */
+	background: #efe; /* para la version 0.1 color verde */
+	border: 3px solid #05a650; /* para la version 0.1 color verde */
+	/*background: #fee;*/ /* para la version 0.2 color rojo */
+	/*border: 3px solid #a51405;*/ /* para la version 0.2 color rojo */
+	box-shadow: 10px 10px 10px #333;
+	padding: 10px 20px;
+	margin: 20px auto;
+	text-align: left;
+	width: 60%;
+}
+
+.fichaDatos02:hover{
+	/*background: #efe;*/ /* para la version 0.0 color gris */
+	background: #fee; /* para la version 0.1 color verde */
+	border: 3px solid #a51405; /* para la version 0.1 color verde */
+	/*background: #efe;*/ /* para la version 0.1 color rojo */
+	/*border: 3px solid #05a650;*/ /* para la version 0.1 color rojo */
+}
+
+.fichaDatos02 span{
+	display: block;
+	font-weight: bold;
+}
+/* *******************************
+****** SECCION "DIRECTORIO" ******
+******************************* */
+
+.directorio01 div h3{
+	/*background: #eee;*/ /* version 0.0 color gris */
+	background: #caefcc; /* version 0.1 color verde */
+	/*background: #efcaca;*/ /* version 0.2 color rojo */
+	margin-bottom: 0px; 
+	padding: 5px;
+}
+
+.directorio01 div input{
+	/*background: #eee;*/ /* version 0.0 color gris */
+	/*border: 2px solid #999;*/ /* version 0.0 color gris */
+	background: #efe; /* version 0.1 color verde */
+	border: 2px solid #05a650; /* version 0.1 color verde */
+	/*background: #fee;*/ /* version 0.2 color rojo */
+	/*border: 2px solid #a51405;*/ /* version 0.2 color rojo */
+	border-radius: 10px;
+	color: #333;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.directorio01 div input:hover{
+	/*background: #ddd;*/ /* version 0.0 color gris */
+	/*border: 2px solid #999;*/ /* version 0.0 color gris */
+	background: #fee; /* version 0.1 color verde */
+	border: 2px solid #a51405; /* version 0.1 color verde */
+	/*background: #efe;*/ /* version 0.2 color rojo */
+	/*border: 2px solid #05a650;*/ /* version 0.2 color rojo */
+	color: #000;
+	cursor: pointer;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.directorio01 div table{
+	/*border: 1px solid #eee;*/ /* version 0.0 color gris */
+	/*border: 1px solid #999;*/ /* version 0.0 color gris */
+	background: #efe; /* version 0.1 color verde */
+	border: 1px solid #05a650; /* version 0.1 color verde */
+	/*background: #fee;*/ /* version 0.2 color rojo */
+	/*border: 1px solid #a51405;*/ /* version 0.2 color rojo */
+	margin-left: 50px;
+	padding: 10px;
+	width: 630px;
+}
+
+.directorio01 div table td + td{
+	text-align: right;
+}
+
+.directorio01 div span{
+	display: block;
+	font-weight: bold;:
+}
+
+.directorio01 div span + span{
+	font-weight: normal;
+}
+
+/* ************************
+****** VENTANA MODAL ******
+************************ */
+
+.modalFondo{
+	background: #000;
+	display: none;
+	height: 100%;
+	left: 0;
+	opacity: .95;
+	-khtml-opacity: 0.5;
+	-moz-opacity:0.95;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=95)";
+	filter: alpha(opacity=95);
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 998;
+}
+
+.modalBlanco{
+	color: #333;
+	background: #eee;
+	display: none;
+	height: 80%;
+	left: 20%;
+	overflow: auto;
+	padding: 20px 16px 16px 16px;
+	position: fixed;
+	top: 5%;
+	width: 50%;
+	z-index: 999;
+}
+
+#modalBotonCerrar{
+	background: url(../img/varios/botonCerrar01.png);
+	height: 40px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 40px;
+}
+
+#modalBotonCerrar:hover{
+	background: url(../img/varios/botonCerrar02.png);
+	height: 40px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 40px;
+}
+
+/* ************************************
+****** FORMULARIO DEL DIRECTORIO ******
+************************************ */
+
+.formDirectorio{
+	background: #eee;
+	border: 3px solid #999;
+	border-radius: 15px;
+	padding: 15px;
+}
+
+.formDirectorio label{
+	display: block;
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: 15px;
+}
+
+.formDirectorio span + hr + label  + input{
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px;
+	width: 80%;
+}
+
+.formDirectorio input, .formDirectorio select{
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px;
+}
+
+.formDirectorio textarea{
+	width: 95%;
+}
+
+input+div, textarea+div{
+	color: #f00;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.formDirectorio hr{
+	color: #333;
+	width: 95%;
+}
+
+.formDirectorio p{
+	text-align: center;
+}
+
+.boton01{
+	background: #eee;
+	border: 2px solid #999;
+	border-radius: 10px;
+	color: #333;
+	font-weight: bold;
+	margin: 0 5px;
+}
+
+.boton01:hover{
+	background: #ddd;
+	color: #000;
+	cursor: pointer;
+}
+
+.boton02{
+	background: #cfc;
+	border: 2px solid #060;
+	border-radius: 10px;
+	box-shadow: 5px 5px 10px #000; 
+	color: #060;
+	font-weight: bold;
+	margin: 15px 0;
+	padding: 15px;
+	text-decoration: none;
+}
+
+.boton02:hover{
+	background: #fcc;
+	border: 2px solid #600;
+	color: #600;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+/* ************************
+****** PIE DE PAGINA ******
+************************ */
+.comentarios_fb{
+	margin: 50px 0 50px 150px;
+	text-align: left;
+}
