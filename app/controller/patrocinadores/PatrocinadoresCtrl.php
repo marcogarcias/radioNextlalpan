@@ -1,5 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/model/patrocinadores/PatrocinadoresMd.php';//'../../app/model/patrocinadores/PatrocinadoresMd.php';
+require_once '../app/model/patrocinadores/PatrocinadoresMd.php';
+//require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/model/patrocinadores/PatrocinadoresMd.php';//'../../app/model/patrocinadores/PatrocinadoresMd.php';
 
 class PatrocinadoresCtrl{
 	public $model;

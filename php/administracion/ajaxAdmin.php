@@ -1,4 +1,5 @@
 <?php
+//require_once 'app/paths.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/paths.php';
 
 $func = isset($_POST['func']) && $_POST['func'] ? $_POST['func'] : 'sinDefinir';

@@ -1,5 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/Model.php'; //'../../app/Model.php';
+require_once '../app/Model.php';
+//require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/Model.php'; //'../../app/Model.php';
 
 class PatrocinadoresMd extends Model{
 	public function __construct(){

@@ -1,5 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/paths.php';
+require_once '../app/paths.php';
+//require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/paths.php';
 
 $func = isset($_POST['func']) && $_POST['func'] ? $_POST['func'] : 'sinDefinir';
 
@@ -29,8 +30,10 @@ function goFunction($func){
   *
   */
 function getImgsPatrocinadores(){
-	require_once PATH.'/app/controller/patrocinadores/PatrocinadoresCtrl.php';
-	require_once PATH.'/app/Utils.php';
+	require_once '../app/controller/patrocinadores/PatrocinadoresCtrl.php';
+	//require_once PATH.'/app/controller/patrocinadores/PatrocinadoresCtrl.php';
+	require_once '../app/Utils.php';
+	//require_once PATH.'/app/Utils.php';
 	$patrocinadores = new PatrocinadoresCtrl();
 	$cols = 'p.logoName, p.logoUrl, p.sliderOrder';
 	$filter = 'AND p.sliderVisible=1 ORDER BY p.sliderOrder ASC';
