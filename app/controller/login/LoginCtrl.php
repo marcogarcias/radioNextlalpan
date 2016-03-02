@@ -1,5 +1,12 @@
 <?php
-require_once '../../app/model/login/LoginMd.php';
+if(session_id() == '') session_start();
+
+$serv = $_SERVER['DOCUMENT_ROOT'].'/dominios/radionextlalpan';
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+
+require_once PATH.'/app/model/login/LoginMd.php';
 
 class LoginCtrl{
 	public $model;
@@ -8,6 +15,7 @@ class LoginCtrl{
 	public function __construct(){
 		$this->model = new LoginMd();
 		$this->path = '../../php/administracion';
+		//$this->path = '../../php/administracion';
 	}
 /**
   * verifica que el usuario exista y que coincida el password

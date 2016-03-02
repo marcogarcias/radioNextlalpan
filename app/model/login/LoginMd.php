@@ -1,5 +1,10 @@
 <?php
-require_once '../../app/Model.php';
+$serv = $_SERVER['DOCUMENT_ROOT'].'/dominios/radionextlalpan';
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+
+require_once PATH.'/app/Model.php';
 
 class LoginMd extends Model{
 	public function __construct(){
