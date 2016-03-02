@@ -11,11 +11,13 @@ class PatrocinadoresMd extends Model{
 		parent::__construct();
 	}
 
-	public function addPatrocinadores($reg=null){
+	public function addPatrocinadores($reg=null, $closeConex=true){
+		$closeConex = $closeConex ? $this->_db : false;
 		$res = false;
 		if(is_array($reg)){
 			$res = $this->insert($reg, 'patrocinadores');
 		}
+		$this->close(null, $closeConex);
 		return $res;
 	}
 	/**

@@ -1,6 +1,10 @@
 <?php session_start(); ?>
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/paths.php';
+$serv = $_SERVER['DOCUMENT_ROOT'].'/dominios/radionextlalpan';
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+
 $appPath = PATH.'/app';
 $ctrlPath = PATH.'/app/controller';
 require_once $appPath.'/Utils.php';
@@ -212,7 +216,6 @@ $(document).ready(function(){
 	Form_.atOnInitPatrocinadorAdd('patrocinadoresAddForm');
 	$('#estado').on('change', function(e){
 		var idMun = <?php echo $data['idMunicipio']; ?>;
-		console.log(idMun);
 		$.ajax({
 			dataType: "json",
 			data: {'func':'getMunicipiosOptions', 'param1':$(this).val(), 'param2':idMun},

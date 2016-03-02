@@ -25,7 +25,7 @@ class LoginMd extends Model{
 		$query = 'SELECT '.$cols.' FROM usuarios usr WHERE usr.isDelete=0 '.$filter;
 		if($result = $this->_db->query($query)){
 			$res = $result->fetch_assoc();
-			$result->close();
+			//$result->close();
 		}
 		$this->close($result, $this->_db);
 		return $res;
