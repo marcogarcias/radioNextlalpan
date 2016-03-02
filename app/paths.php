@@ -5,7 +5,6 @@ $pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan'
 
 // path raiz del proyecto
 define('PATH', $pathFile);
-
 // nombre del proyecto
 //define('PROJECT', 'radioNextlalpan');
 
