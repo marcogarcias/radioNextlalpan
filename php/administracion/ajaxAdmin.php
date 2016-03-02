@@ -1,6 +1,8 @@
 <?php
-//require_once 'app/paths.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/paths.php';
+$serv = $_SERVER['DOCUMENT_ROOT'].'/dominios/radionextlalpan';
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
 
 $func = isset($_POST['func']) && $_POST['func'] ? $_POST['func'] : 'sinDefinir';
 
@@ -37,8 +39,8 @@ function getMunicipiosOptions($idEstado, $idMunicipio=null){
 }
 
 function getMunicipios($idEstado){
-	require_once '../../app/Utils.php';
-	require_once '../../app/model/CatalogMd.php';
+	require_once PATH.'/app/Utils.php';
+	require_once PATH.'/app/model/CatalogMd.php';
 	$catalog = new CatalogMd();
 	$municipios = $catalog->getMunicipiosByEstado($idEstado, null, 'idMunicipio'); // array('uno'=>$idEstado);
 	//$municipios = array('res'=>getcwd());

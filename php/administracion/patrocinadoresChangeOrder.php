@@ -117,7 +117,7 @@ $(document).ready(function(){
 			console.log(idx);
 		});*/
 		var count = 1;
-		var totalRow = $("#slider1Order tbody").children().length;
+		var totalRow = $("#slider1Order tbody").children().length-1;
 		var msg = { false:{ 'class': 'danger', 'icon':'remove', 'msg':'Ocurrió un error, no se pudo cambiar el orden de los patrocinadores.' },
 					true:{ 'class': 'success', 'icon':'ok', 'msg':'El orden de los patrocinadores cambió correctamente.' }};
 		var result = true;
@@ -128,17 +128,17 @@ $(document).ready(function(){
 		$("#slider1Order tbody tr").each(function (index) {
 			var id = $(this).data('idrow');
 			var order = $(this).find('.priority').text();
-			$.ajax({
-				dataType: "json",
-				data: {'func':'updateOrderSlider1', 'param1':id, 'param2':order},
-				url:   'ajaxAdmin.php',
-				type:  'post',
-				beforeSend: function(){
-					// lo que se hará antes de mandar la petición ajax
-				},
-				success: function(res){
-					// orden guardado
-					if(id){
+			if(id){
+				$.ajax({
+					dataType: "json",
+					data: {'func':'updateOrderSlider1', 'param1':id, 'param2':order},
+					url:   'ajaxAdmin.php',
+					type:  'post',
+					beforeSend: function(){
+						// lo que se hará antes de mandar la petición ajax
+					},
+					success: function(res){
+						// si ya se actualizó hasta el último registro y solo hasta el último registro se muestra el mensaje de éxito o error.
 						result && (result = res);
 						if(totalRow==count){
 							msgDiv = msgDiv.replace('#class#', msg[result].class);
@@ -146,31 +146,14 @@ $(document).ready(function(){
 							msgDiv = msgDiv.replace('#icon#', msg[result].icon);
 							$('#msg').empty().html(msgDiv);
 						}
+						count++;
+					},
+					error:    function(xhr,err){
+						console.log("Ocurrio un error, intentelo nuevamente:", xhr);
 					}
-					count++;
-				},
-				error:    function(xhr,err){
-					console.log("Ocurrio un error, intentelo nuevamente:", xhr);
-				}
-			});	
+				});
+			}
 		});
-
-		//$('.alert').fadeIn('100000', function(){ console.log('momo'); });
-		/*$.ajax({
-			dataType: 'json',
-			data: {'func':'saveOrderSlider1', 'param1': '', 'param2':''},
-			url: 'ajaxAdmin.php',
-			type: 'post',
-			beforeSend: function(){
-
-			},
-			success: function(res){
-
-			},
-			error: function(xhr, err)(
-
-			)
-		});*/
 	});
 
 	$('.logoPatrocinador').on('click', function(){
