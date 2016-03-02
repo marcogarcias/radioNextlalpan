@@ -1,6 +1,10 @@
 <?php
-require_once 'cfg.php';
-//require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/cfg.php';// 'cfg.php';
+$serv = $_SERVER['DOCUMENT_ROOT'].'/dominios/radionextlalpan';
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+require_once PATH.'/app/cfg.php';
+//require_once 'cfg.php';
 
 class Model{
 	protected $_db;

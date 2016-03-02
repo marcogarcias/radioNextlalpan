@@ -1,6 +1,10 @@
 <?php
-require_once '../app/model/patrocinadores/PatrocinadoresMd.php';
-//require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/model/patrocinadores/PatrocinadoresMd.php';//'../../app/model/patrocinadores/PatrocinadoresMd.php';
+$serv = $_SERVER['DOCUMENT_ROOT'].'/dominios/radionextlalpan';
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+require_once PATH.'/app/model/patrocinadores/PatrocinadoresMd.php';
+//require_once '../app/model/patrocinadores/PatrocinadoresMd.php';
 
 class PatrocinadoresCtrl{
 	public $model;

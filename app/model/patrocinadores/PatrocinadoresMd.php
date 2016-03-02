@@ -1,6 +1,9 @@
 <?php
-require_once '../app/Model.php';
-//require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/Model.php'; //'../../app/Model.php';
+$serv = $_SERVER['DOCUMENT_ROOT'].'/dominios/radionextlalpan';
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once PATH.'/app/Model.php';
+//require_once '../app/Model.php';
 
 class PatrocinadoresMd extends Model{
 	public function __construct(){
