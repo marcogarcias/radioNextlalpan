@@ -1,4 +1,5 @@
 <?php
+// directorio limpio
 $serv = $_SERVER['DOCUMENT_ROOT'].'/dominios/radionextlalpan';
 $pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
 $pathFile = $pathFile.'/app/paths.php';
