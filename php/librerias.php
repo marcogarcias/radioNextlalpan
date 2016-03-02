@@ -110,7 +110,7 @@ function cabeceraBanner(){ ?>
 <!-- ENDS -->
 
 <!-- BEGINS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
-		<script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
+		<!-- <script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
 		<script type="text/javascript">
 			MRP.insert({
 				'url':'http://50.22.218.73:30713/;',
@@ -126,7 +126,7 @@ function cabeceraBanner(){ ?>
 				'width':501,
 				'height':32
 			});
-		</script>
+		</script> -->
 <!-- ENDS -->
 	</div>
 </div>
