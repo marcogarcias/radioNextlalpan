@@ -54,7 +54,7 @@ class PatrocinadoresCtrl{
 
 			$res = $this->model->addPatrocinadores($patrocinador);
 			
-			header('location: ' .'index.php');
+			header('location: ' .'patrocinadoresList.php');
 		}
 		return get_defined_vars ();
 	}

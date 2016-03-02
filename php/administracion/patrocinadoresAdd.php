@@ -1,9 +1,14 @@
 <?php session_start(); ?>
 <?php
-require_once '../../app/Utils.php';
-require_once '../../app/model/CatalogMd.php';
-require_once '../../app/controller/login/LoginCtrl.php';
-require_once '../../app/controller/patrocinadores/PatrocinadoresCtrl.php';
+$serv = $_SERVER['DOCUMENT_ROOT'].'/dominios/radionextlalpan';
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+
+require_once PATH.'/app/Utils.php';
+require_once PATH.'/app/model/CatalogMd.php';
+require_once PATH.'/app/controller/login/LoginCtrl.php';
+require_once PATH.'/app/controller/patrocinadores/PatrocinadoresCtrl.php';
 
 $catalog = new CatalogMd();
 $estados = $catalog->getEstados(null, null, null, 'idEstado');

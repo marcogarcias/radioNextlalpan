@@ -15,7 +15,9 @@ goFunction($func);
 function goFunction($func){
 	switch ($func) {
 		case 'getMunicipiosOptions':
-			$json = getMunicipiosOptions($_POST['param1'], $_POST['param2']);
+		$idEst = isset($_POST['param1']) ? $_POST['param1'] : null;
+		$idMun = isset($_POST['param2']) ? $_POST['param2'] : null;
+			$json = getMunicipiosOptions($idEst, $idMun);
 			break;
 
 		case 'updateOrderSlider1':

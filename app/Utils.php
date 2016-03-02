@@ -144,7 +144,7 @@ class Utils{
 				$assoc ? $res[$fila[$assoc]] = $fila
 					: array_push($res, $fila);
 			}
-			$result->close();
+			//$result->close();
 		}
 		return $res;
 	}

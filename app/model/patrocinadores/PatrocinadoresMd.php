@@ -2,6 +2,7 @@
 $serv = $_SERVER['DOCUMENT_ROOT'].'/dominios/radionextlalpan';
 $pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
 $pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
 require_once PATH.'/app/Model.php';
 //require_once '../app/Model.php';
 
@@ -35,7 +36,7 @@ class PatrocinadoresMd extends Model{
 				LEFT JOIN estados e ON e.idEstado=p.estado
 				LEFT JOIN municipios m ON m.idMunicipio=p.municipio
 				WHERE p.isDelete=0 '.$filter;
-		if($result = $this->_db->query($query, MYSQLI_USE_RESULT)){
+		if($result = $this->_db->query($query)){
 			$res = Utils::sqlToArray($result, $assoc);
 		}
 		$this->close($result, $closeConex);

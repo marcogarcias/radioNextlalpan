@@ -1,6 +1,10 @@
 <?php
-//header("Content-Type: text/html;charset=utf-8");
-require_once '../../app/Model.php';
+$serv = $_SERVER['DOCUMENT_ROOT'].'/dominios/radionextlalpan';
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+require_once PATH.'/app/Model.php';
+//require_once '../../app/Model.php';
 
 class CatalogMd extends Model{
 	public function __construct(){
@@ -23,7 +27,7 @@ class CatalogMd extends Model{
 		$query = 'SELECT '.$cols.' FROM estados WHERE isDelete=0'.$filter;
 		if($result = $this->_db->query($query)){
 			$res = Utils::sqlToArray($result, $assoc);
-			$result->close();
+			//$result->close();
 		}
 		$this->close($result, $this->_db);
 		return $res;
@@ -33,7 +37,6 @@ class CatalogMd extends Model{
 	 * retorna los municipios de un estado en específico
 	 * @param int $idEstado indica el id del estado a buscar. Se retornarán los datos de ese registro
 	 * @param String $cols indica las columnas a returnar, si no se especifica retorna todas
-	 * @param String $filter indica el filtro que se quiere aplicar a la consulta
 	 * @param String $assoc indica si se quiere retornar la consulta en forma de array numérico o associativo.
 	 *		Si es asociativo se indica en esta variable que columna será el índice del array
 	 *
@@ -41,7 +44,7 @@ class CatalogMd extends Model{
 	public function getMunicipiosByEstado($idEstado=null, $cols=null, $assoc=false){
 		$cols = $cols ? $cols : '*';
 		$res;
-		$filter.= $idEstado ? ' AND idEstado='.$idEstado : '';
+		$filter= $idEstado ? ' AND idEstado='.$idEstado : '';
 		$res = self::getMunicipios(null, $cols, $filter, $assoc);
 		return $res;
 	}
@@ -63,7 +66,7 @@ class CatalogMd extends Model{
 		$query = 'SELECT '.$cols.' FROM municipios WHERE isDelete=0'.$filter;
 		if($result = $this->_db->query($query)){
 			$res = Utils::sqlToArray($result, $assoc);
-			$result->close();
+			//$result->close();
 		}
 		$this->close($result, $this->_db);
 		return $res;

@@ -21,8 +21,8 @@ class Model{
 	}
 
 	public function close($param1=null, $param2=null){
-		//$param1 && ($param1->close());
-		//$param2 && ($param2->close());
+		$param1 && ($param1->close());
+		$param2 && ($param2->close());
 	}
 
 	public function insert($reg=array(), $table=null){
