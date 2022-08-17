@@ -144,7 +144,7 @@ class Utils{
 				$assoc ? $res[$fila[$assoc]] = $fila
 					: array_push($res, $fila);
 			}
-			$result->close();
+			//$result->close();
 		}
 		return $res;
 	}
@@ -176,7 +176,7 @@ class Utils{
 	 *
 	 */
 	public static function getIndexPost($post = null, $idx=''){
-		return isset($post[$idx]) && $post[$idx] ? $post[$idx] : '';
+		return isset($post[$idx]) && $post[$idx] ? $post[$idx] : false;
 	}
 
 	/**
@@ -186,6 +186,8 @@ class Utils{
 	 * @param String $rules indica las reglas a considerar para mover el archivo a la ubicación dada. 
 	 	EJM: $rules['formats'] = 'image/jpeg|image/gif|image/png'; indica el tipo de archivo que puede ser para poder ser movido con éxito.
 	 	 	$rules['sizeMaxKb'] = '200'; indica el tamaño máximo del archivo para poder ser subido.
+	 	 	$rules['dimensionsMin'] = '450|150'; indica el ancho/alto mínimo del archivo para poder ser subido.
+	 	 	$rules['dimensionsMax'] = '2700|900'; indica el ancho/alto máximo del archivo para poder ser subido.
 	 *
 	 */
 	public static function updateFile($file=null, $dirTo=null, $rules=array()){
@@ -200,6 +202,10 @@ class Utils{
 
 		$formats = isset($rules['formats']) && $rules['formats'] ? $rules['formats'] : 'image/jpeg';
 		$sizeMax = isset($rules['sizeMaxKb']) && $rules['sizeMaxKb'] ? $rules['sizeMaxKb'] : 2048;
+		$dimMin = isset($rules['dimensionsMin']) && $rules['dimensionsMin'] ? $rules['dimensionsMin'] : '10|10';
+		$dimMax = isset($rules['dimensionsMax']) && $rules['dimensionsMax'] ? $rules['dimensionsMax'] : '2500|2500';
+		$resize = isset($rules['resize']) && $rules['resize'] ? $rules['resize'] : '990|300';
+
 		if($file && $dirTo){
 			if(is_uploaded_file($fileTmp)){
 				if(is_file($fileTmp)){
@@ -208,21 +214,108 @@ class Utils{
 					if(in_array($format, $formats)){
 						// verificando que el tamaño no supere al indicado en el índice "sizeMaxKb" de las reglas
 						if($size <= $sizeMax){
-							$id = date('dmYHis');
-							$nameFile = $id.'-'.$nameFile;
-							$dirFull = $dirTo.'/'.$nameFile;
-							chmod($dirTo, 0777);
-							if(move_uploaded_file($fileTmp, $dirFull)){
-								$fileData['success']=array('name'=>$nameFile, 'size'=>$file['size']);
-								$fileData['res'] = 1;
-								$fileData['resMsg'] = 'El archivo se subió correctamente';
-							}else $fileData['resMsg'] = 'El archivo no se logró mover a la carpeta indicada';
+							// verificando las dimenciones mínimas/máximas permitidas
+							if(self::checkDimensions($dimMin, $dimMax, $fileTmp)){
+								if($format=='image/jpeg' || $format=='image/gif' || $format=='image/png')
+									$fileTmp = self::resizeImage($fileTmp, $resize);
+								$id = date('dmYHis');
+								$nameFile = $id.'-'.$nameFile;
+								$dirFull = $dirTo.'/'.$nameFile;
+								if(move_uploaded_file($fileTmp, $dirFull)){
+									chmod($dirFull, 0777);
+									$fileData['success']=array('name'=>$nameFile, 'size'=>$file['size']);
+									$fileData['res'] = 1;
+									$fileData['resMsg'] = 'El archivo se subió correctamente';
+								}else $fileData['resMsg'] = 'El archivo no se logró mover a la carpeta indicada';
+							}else $fileData['resMsg'] = 'El archivo no tiene las medidas mínimas o máximas (ancho/alto) requeridas para ser subido.';
 						}else $fileData['resMsg'] = 'El archivo supera el tamaño permitido.';
 					}else $fileData['resMsg'] = 'El archivo a subir no tiene el formato correcto.';
 				}else $fileData['resMsg'] = 'El archivo indicado es un archivo incorrecto.';
 			}else $fileData['resMsg'] = 'El archivo no se ha subido correctamente.';
 		}else $fileData['resMsg'] = 'No se ha especificado un directorio destino para subir el archivo.';
 		return $fileData;
+	}
+
+	/**
+	 * verifica que una imagen tenga el mínimo/máximo de ancho/alto. Si está dentro del rango devielve true de lo contrario false
+	 * @param String $dimMin indica el ancho/alto mínimo de la imagen separados por el símbolo pipe
+	 * @param String $dimMax indica el ancho/alto máximo de la imagen separados por el símbolo pipe
+	 * @param String $file indica la ruta y nombre del archivo a subir
+	 */
+	public function checkDimensions($dimMin='10|10', $dimMax='2500|2500', $file=null){
+		$dimMin || $dimMin='10|10';
+		$dimMax || $dimMax='2500|2500';
+		$res = false;
+		if(is_string($dimMin) && is_string($dimMax) && is_string($file) && is_file($file)){
+			// obteniendo el width/height mínimos
+			$dimMin = explode('|', $dimMin);
+			$dimMinW = isset($dimMin[0]) && is_numeric($dimMin[0]) ? intval($dimMin[0]) : 10;
+			$dimMinH = isset($dimMin[1]) && is_numeric($dimMin[1]) ? intval($dimMin[1]) : 10;
+
+			// obteniendo el width/height máximos
+			$dimMax = explode('|', $dimMax);
+			$dimMaxW = isset($dimMax[0]) && is_numeric($dimMax[0]) ? intval($dimMax[0]) : 2500;
+			$dimMaxH = isset($dimMax[1]) && is_numeric($dimMax[1]) ? intval($dimMax[1]) : 2500;
+			
+			// obteniendo el width/height de la imagen
+			$fileInfo = getimagesize($file);
+			$width = $fileInfo[0];
+			$height = $fileInfo[1];
+			if(($width >= $dimMinW && $height >= $dimMinH) && ($width <= $dimMaxW && $height <= $dimMaxH)){
+				$res = true;
+			}
+		}
+		return $res;
+	}
+
+	/**
+	 * redimenciona una imagen de acuerdo a las dimenciones dadas
+	 * @param String $file indica la url y nombre de la imagen a redimencionar
+	 * @param String $width indica el ancho al cual se redimencionará la imagen
+	 * @param String $height indica el alto al cual se redimencionará la imagen
+	 *
+	 */
+	public function resizeImage($file = null, $resize=null){
+		$resize || $resize = '900|300';
+		if(is_file($file)){
+			$destiny = $file;
+			$resize = explode('|', $resize);
+			$width = isset($resize[0]) && is_numeric($resize[0]) ? intval($resize[0]) : 900;
+			$height = isset($resize[1]) && is_numeric($resize[1]) ? intval($resize[1]) : 300;
+			$fileInfo = getimagesize($file);
+			$widthFile = $fileInfo[0];
+			$heightFile = $fileInfo[1];
+			$mime = $fileInfo['mime'];
+			$quality = 100;
+			//Creamos una variable imagen a partir de la imagen original
+			chmod($file, 0777);
+			switch ($mime) {
+				case 'image/jpeg':
+					$fileNew = imagecreatefromjpeg($file);		
+					break;
+				case 'image/gif':
+					$fileNew = imagecreatefromgif($file);		
+					break;
+				case 'image/png':
+					$fileNew = imagecreatefrompng($file);
+					break;
+				default:
+					$fileNew = imagecreatefromjpeg($file);
+					break;
+			}	
+			//Creamos una imagen en blanco de tamaño $width por $height.
+			$tmp=imagecreatetruecolor($width, $height);	
+	
+			//Copiamos $fileNew sobre la imagen que acabamos de crear en blanco ($tmp)
+			imagecopyresampled($tmp, $fileNew, 0, 0, 0, 0, $width, $height, $widthFile, $heightFile);
+	
+			//Se destruye variable $fileNew para liberar memoria
+			imagedestroy($fileNew);
+			//chmod($tmp, 0777);
+			//Se crea la imagen final en el directorio indicado
+			imagejpeg($tmp, $file, $quality);			
+		}
+		return $file;
 	}
 	/**
 	  * retorna la estructura de una tabla con drag and drop sobre sus filas.

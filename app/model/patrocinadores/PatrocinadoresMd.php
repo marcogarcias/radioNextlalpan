@@ -1,17 +1,23 @@
 <?php
-require_once '../app/Model.php';
-//require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/Model.php'; //'../../app/Model.php';
+$serv = $_SERVER['DOCUMENT_ROOT'];
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+require_once PATH.'/app/Model.php';
+//require_once '../app/Model.php';
 
 class PatrocinadoresMd extends Model{
 	public function __construct(){
 		parent::__construct();
 	}
 
-	public function addPatrocinadores($reg=null){
+	public function addPatrocinadores($reg=null, $closeConex=true){
+		$closeConex = $closeConex ? $this->_db : false;
 		$res = false;
 		if(is_array($reg)){
 			$res = $this->insert($reg, 'patrocinadores');
 		}
+		$this->close(null, $closeConex);
 		return $res;
 	}
 	/**
@@ -32,7 +38,7 @@ class PatrocinadoresMd extends Model{
 				LEFT JOIN estados e ON e.idEstado=p.estado
 				LEFT JOIN municipios m ON m.idMunicipio=p.municipio
 				WHERE p.isDelete=0 '.$filter;
-		if($result = $this->_db->query($query, MYSQLI_USE_RESULT)){
+		if($result = $this->_db->query($query)){
 			$res = Utils::sqlToArray($result, $assoc);
 		}
 		$this->close($result, $closeConex);
@@ -50,6 +56,15 @@ class PatrocinadoresMd extends Model{
 			}
 			$this->close(null, $closeConex);
 			return $res;
+		}
+	}
+
+	public function deletePatrocinador($id=null, $closeConex=true){
+		$res = false;
+		if($id){
+			$fields = array('isDelete'=>1);
+			$where = ' AND idPatrocinadores='.$id;
+			return self::updatePatrocinador($fields, $where, $closeConex);
 		}
 	}
 }

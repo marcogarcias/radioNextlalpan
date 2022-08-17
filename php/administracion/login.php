@@ -1,8 +1,13 @@
 <?php session_start(); ?>
 <?php
-require_once '../../app/paths.php';
-require_once '../../app/Utils.php';
-require_once '../../app/controller/login/LoginCtrl.php';
+$serv = $_SERVER['DOCUMENT_ROOT'];
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+
+require_once PATH.'/app/paths.php';
+require_once PATH.'/app/Utils.php';
+require_once PATH.'/app/controller/login/LoginCtrl.php';
 $loginCtrl = new LoginCtrl();
 $error = isset($_SESSION["resSubmit"]['error']) ? $_SESSION["resSubmit"]['error'] : null;
 $hide = $error ? '' : 'hide';

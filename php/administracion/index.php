@@ -1,8 +1,14 @@
 <?php session_start(); ?>
 <?php
-require_once '../../app/Utils.php';
-require_once '../../app/controller/login/LoginCtrl.php';
-//include("adminLibrerias.php");
+$serv = $_SERVER['DOCUMENT_ROOT'];
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+
+require_once PATH.'/app/Utils.php';
+require_once PATH.'/app/controller/login/LoginCtrl.php';
+//require_once '../../app/Utils.php';
+//require_once '../../app/controller/login/LoginCtrl.php';
 $loginCtrl = new LoginCtrl();
 $loginCtrl->checkActiveSessionCtrl('login');
 $error = isset($_SESSION["resSubmit"]['error']) ? $_SESSION["resSubmit"]['error'] : null;
@@ -21,6 +27,7 @@ Utils::getNavAdmin('dashboard');
 <section>
 	<article>
 <?php Utils::getUserDataAdmin(); ?>
+
 	</article>
 </section>
 

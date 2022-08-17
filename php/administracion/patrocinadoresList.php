@@ -1,6 +1,10 @@
 <?php session_start(); ?>
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/paths.php';
+$serv = $_SERVER['DOCUMENT_ROOT'];
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+
 $appPath = PATH.'/app';
 $ctrlPath = PATH.'/app/controller';
 require_once $appPath.'/Utils.php';
@@ -12,14 +16,16 @@ $loginCtrl = new LoginCtrl();
 $loginCtrl->checkActiveSessionCtrl('login');
 
 $patr = new PatrocinadoresCtrl();
-$list = $patr->getAllPatrocinadores();
-$table = $patr->getTablePatrocinadores($list);
+// verificar los permisos que tiene el usuario por comparación bitwise
+$view = ($_SESSION['grupoPermisos'] & 1);
 
+$list = $patr->getAllPatrocinadores();
+$table = $view ? $patr->getTablePatrocinadores($list) : 'No tienes permisos para visualizar los datos.';
 $error = isset($_SESSION["resSubmit"]['error']) ? $_SESSION["resSubmit"]['error'] : null;
 $hide = $error ? '' : 'hide';
 $msg = isset($_SESSION["resSubmit"]['msg']) ? $_SESSION["resSubmit"]['msg'] : null;
-
-
+$icon = isset($_SESSION["resSubmit"]['icon']) ? $_SESSION["resSubmit"]['icon'] : null;
+if(isset($_SESSION["resSubmit"]))  unset($_SESSION["resSubmit"]);;
 Utils::headPageAdmin();
 ?>
 
@@ -46,6 +52,10 @@ Utils::getNavAdmin('patrocinadores', 'listPatrocinadores');
 				<div class="panel panel-primary">
 					<div class="panel-heading"><strong>Patrocinadores registrados</strong></div>
 					<div class="panel-body">
+						<div class="alert alert-<?php echo $error.' '.$hide; ?>" role="alert">
+							<span class="glyphicon glyphicon-<?php echo $icon; ?>" aria-hidden="true"></span>
+							<?php echo $msg; ?>
+						</div>
 						<?php echo $table; ?>
 					</div>
 				</div>
@@ -54,10 +64,31 @@ Utils::getNavAdmin('patrocinadores', 'listPatrocinadores');
 	</article>
 </section>
 
+<div id="ej" data-ej="ok"></div>
+
 <?php Utils::getFooterAdmin(); ?>
 <script>
 $(document).ready(function(){
-	
+	$('.delete').on('click', function(e){
+		e.preventDefault();
+		console.log('oko');
+		var id = $(this).data('idpatr');
+		$.ajax({
+			dataType: "json",
+			data: {'func':'deletePatrocinador', 'param1':id},
+			url:   'ajaxAdmin.php',
+			type:  'post',
+			beforeSend: function(){
+				// lo que se hará antes de mandar la petición ajax
+			},
+			success: function(res){
+				window.location.reload();
+			},
+			error:    function(xhr,err){
+				console.log("Ocurrio un error, intentelo nuevamente:", xhr);
+			}
+		});
+	});
 });
 </script>
 </body>

@@ -1,0 +1,107 @@
+.border{
+  border:0px solid #000;
+}
+
+.border2{
+  border:0px solid #f00;
+}
+
+.border3{
+  border:0px solid #0f0;
+}
+
+.rep2{
+  display: block;
+
+  margin: 0;
+  padding: 0;
+  max-width: 500px;
+  width: 100%;
+}
+
+.rep2-header{
+  background-color: #fff;
+  border: 3px solid #75ba00;
+  border-radius: 10px 10px 0 0;
+}
+
+.rep2-play{
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  width: 20%;
+
+  transition: all 0.5s linear;
+  -webkit-transition: all 0.5s linear; /** Chrome & Safari **/
+  -moz-transition: all 0.5s linear; /** Firefox **/
+  -o-transition: all 0.5s linear; /** Opera **/
+}
+
+.rep2-play:hover{
+  transform: rotateY(180deg);
+}
+
+.rep2-play img{
+  width: 100%;
+}
+
+.rep2-display{
+  display: inline-block;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 0;
+  text-align: center;
+  vertical-align: top;
+  width: 78%;
+}
+
+.rep2-display hr{
+  margin: 0 auto;
+}
+
+.rep2-footer{
+  background-color: #07620D;
+  padding: 5px;
+  position: relative;
+  text-align: center;
+}
+
+.rep2-foot{
+  display: inline-block;
+  width: 31%;
+}
+
+.rep2-radionextlalpan{
+  bottom: 10px;
+  color: #6C0309;
+  font-size: 15px;
+  font-weight: bold;
+  position: absolute;
+  text-align: center;
+  text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+.rep2-social{
+  display: inline-block;
+  text-align: center;
+  width: 20%;
+}
+
+.rep2-social img{
+  width: 100%;
+}
+
+.rep2-volume-cont{
+  display: inline-block;
+  width: 20%;
+}
+
+.rep2-volume-cont img{
+  width: 100%;
+}
+
+.rep2-volume{
+  display: inline-block !important;
+  width: 70% !important;
+}

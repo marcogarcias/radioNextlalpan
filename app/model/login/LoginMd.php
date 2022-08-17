@@ -1,5 +1,10 @@
 <?php
-require_once '../../app/Model.php';
+$serv = $_SERVER['DOCUMENT_ROOT'];
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+
+require_once PATH.'/app/Model.php';
 
 class LoginMd extends Model{
 	public function __construct(){
@@ -13,14 +18,19 @@ class LoginMd extends Model{
 		return $res;
 	}
 
-	public function getUsers($idUser=null, $cols='usr.*', $filter=''){
+	public function getUsers($idUser=null, $cols='usr.*, gru.*', $filter=''){
 		$res = false;
 		$filter.= $idUser ? ' AND usr.idUser='.$idUser : '';
-		$cols = $cols ? $col : 'usr.*';
-		$query = 'SELECT '.$cols.' FROM usuarios usr WHERE usr.isDelete=0 '.$filter;
+		$colsDef = 'usr.idUser, usr.nombre, usr.ap, usr.am, usr.email, usr.password, usr.permisos, gru.grupo AS gru_grupo, gru.permisos AS gru_permisos';
+		$cols = $cols ? $col : $colsDef;
+		$query = 'SELECT '.$cols.' 
+			FROM usuarios usr 
+			LEFT JOIN grupos gru 
+			ON usr.grupo = gru.idGrupo
+			WHERE usr.isDelete=0 '.$filter;
 		if($result = $this->_db->query($query)){
 			$res = $result->fetch_assoc();
-			$result->close();
+			//$result->close();
 		}
 		$this->close($result, $this->_db);
 		return $res;

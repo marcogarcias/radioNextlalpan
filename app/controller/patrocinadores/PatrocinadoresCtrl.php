@@ -1,6 +1,10 @@
 <?php
-require_once '../app/model/patrocinadores/PatrocinadoresMd.php';
-//require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/model/patrocinadores/PatrocinadoresMd.php';//'../../app/model/patrocinadores/PatrocinadoresMd.php';
+$serv = $_SERVER['DOCUMENT_ROOT'];
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+require_once PATH.'/app/model/patrocinadores/PatrocinadoresMd.php';
+//require_once '../app/model/patrocinadores/PatrocinadoresMd.php';
 
 class PatrocinadoresCtrl{
 	public $model;
@@ -38,27 +42,51 @@ class PatrocinadoresCtrl{
 
 			// comprobando si se subió alguna imagen del logo del patrocinador
 			$file_ = isset($file['logo']) && $file['logo'] ? $file['logo'] : null;
-			$dirTo = '../../public/img/patrocinadores';
-			$rules =array('formats'=>'image/jpeg|image/png|image/gif', 'sizeMaxKb'=>2048);
+			$dirTo = PATH.'/public/img/patrocinadores';
+			$rules =array('formats'=>'image/jpeg', 'sizeMaxKb'=>2048, 'dimensionsMin'=>'200|200', 'dimensionsMax'=>'1800|1800', 'resize'=>'990|300');
 			$resFile = Utils::updateFile($file_, $dirTo, $rules);
 			$success = (isset($resFile['res']) && $resFile['res']==1 && isset($resFile['success']) && is_array($resFile['success'])) ? $resFile['success'] : false;
+			$msn = isset($resFile['resMsg']) ? $resFile['resMsg'] : null;
+			$lastSlider = self::lastOrderSlider(false);
+
 			$patrocinador['logoUrl'] = $this->pathPublic;
 			$patrocinador['logoName'] = $success ? $success['name'] : null;
 			$patrocinador['logoSize'] = $success ? $success['size'] : 0;
-			$patrocinador['sliderOrder'] = 0;
-			$patrocinador['sliderVisible'] = 0;
+			$patrocinador['sliderOrder'] = $success && Utils::getIndexPost($post, 'sliderVisible') ? ++$lastSlider : 0;
+			$patrocinador['sliderVisible'] = $success && Utils::getIndexPost($post, 'sliderVisible') ? 1 : 0;
 
 			$res = $this->model->addPatrocinadores($patrocinador);
-			
-			header('location: ' .'index.php');
+
+			$error = $success && $res ? 'success' : 'warning';
+			$msn1 = $res ? 'El patrocinador se dió de alta correctamente.' : 'Ocurrió un problema. El patrocinador no se registró correctamente.';
+			$msn2 = isset($resFile['resMsg']) && $resFile['resMsg'] ? $resFile['resMsg'] : null;
+			$icon = $success && $res ? 'ok' : 'remove'; 
+			$_SESSION["resSubmit"] = array('error' => $error, 'msg'=>$msn1.'<br />'.$msn2, 'icon'=>$icon);
+			header('location: ' .'patrocinadoresList.php');
 		}
 		return get_defined_vars ();
+	}
+
+	/**
+	 * retorna el último orden que hay en el slider de patrocinadores
+	 *
+	 */
+	public function lastOrderSlider($closeConex = true){
+		$cols = 'max(p.sliderOrder) AS lastOrder';
+		$filter = 'AND p.sliderVisible=1';
+		$lastOrder = self::getImgsSlider1Actives(null, $cols, $filter, false, $closeConex);
+		$lastOrder = isset($lastOrder[0]) ? $lastOrder[0] : false;
+		$lastOrder = isset($lastOrder['lastOrder']) ? $lastOrder['lastOrder'] : 1;		
+		return intVal($lastOrder);
 	}
 
 	public function updatePatrocinadores($post = null, $file=null){
 		if($post){
 			$idPatr = intVal(Utils::getIndexPost($post, 'idPatr'));
 			$visible = Utils::getIndexPost($post, 'sliderVisible');
+			$urlImg = Utils::getIndexPost($post, 'urlImg');
+			//unlink($urlImg);
+			//die();
 			// insertando datos de patrocinador en la tabla 'patrocinadores' de la bd
 			$patrocinador = array(
 				'nombre'=> Utils::getIndexPost($post, 'patrocinador'),
@@ -80,18 +108,33 @@ class PatrocinadoresCtrl{
 			);
 
 			// comprobando si se subió alguna imagen del logo del patrocinador
-			//$file_ = isset($file['logo']) && $file['logo'] ? $file['logo'] : null;
-			//$dirTo = '../../public/img/patrocinadores';
-			//$rules =array('formats'=>'image/jpeg|image/png|image/gif', 'sizeMaxKb'=>2048);
-			//$resFile = Utils::updateFile($file_, $dirTo, $rules);
-			//$success = (isset($resFile['res']) && $resFile['res']==1 && isset($resFile['success']) && is_array($resFile['success'])) ? $resFile['success'] : false;
-			//$patrocinador['logoUrl'] = $this->pathPublic;
-			//$patrocinador['logoName'] = $success ? $success['name'] : null;
-			//$patrocinador['logoSize'] = $success ? $success['size'] : 0;
-			//$patrocinador['sliderOrder'] = 0;
-			//$patrocinador['sliderVisible'] = 0;
+			$file_ = isset($file['logo']) && $file['logo'] ? $file['logo'] : null;
+			$changeImage = is_file($file_['tmp_name']);
+			if($changeImage){
+				$dirTo = PATH.'/public/img/patrocinadores';
+				$rules =array('formats'=>'image/jpeg', 'sizeMaxKb'=>2048, 'dimensionsMin'=>'200|200', 'dimensionsMax'=>'1800|1800', 'resize'=>'990|300');
+				$resFile = Utils::updateFile($file_, $dirTo, $rules);
+				$success = (isset($resFile['res']) && $resFile['res']==1 && isset($resFile['success']) && is_array($resFile['success'])) ? $resFile['success'] : false;
+
+				$patrocinador['logoUrl'] = $this->pathPublic;
+				$patrocinador['logoName'] = $success ? $success['name'] : null;
+				$patrocinador['logoSize'] = $success ? $success['size'] : 0;
+
+				// si se subió una nueva imagen se borra la que se tenía
+				if($success && is_file($urlImg)) unlink($urlImg);
+			}
+
+			$patrocinador['sliderVisible'] = Utils::getIndexPost($post, 'sliderVisible') ? 1 : 0;
+
 			$res = $this->model->updatePatrocinador($patrocinador, 'AND idPatrocinadores='.$idPatr, false);
-			header('location: ' .'patrocinadoresUpdate.php');
+
+			$error = $success && $res ? 'success' : 'warning';
+			$msn1 = $res ? 'Los datos del patrocinador se actualizaron correctamente.' : 'Ocurrió un problema. Los datos del patrocinador no se actualizaron correctamente.';
+			$msn2 = isset($resFile['resMsg']) && $resFile['resMsg'] ? $resFile['resMsg'] : null;
+			$icon = $success && $res ? 'ok' : 'remove'; 
+			$_SESSION["resSubmit"] = array('error' => $error, 'msg'=>$msn1.'<br />'.$msn2, 'icon'=>$icon);
+
+			header('location: ' .'patrocinadoresList.php');
 		}
 		return get_defined_vars ();
 	}
@@ -102,14 +145,18 @@ class PatrocinadoresCtrl{
 		return $res;
 	}
 
-	public function getImgsSlider1Actives($id=null, $cols=null, $filter=''){
-		$imgs = $this->model->getPatrocinadores(null, $cols, $filter);
+	public function getImgsSlider1Actives($id=null, $cols=null, $filter='', $assoc=false, $closeConex=false){
+		$imgs = $this->model->getPatrocinadores(null, $cols, $filter, $assoc=false, $closeConex=false);
 		return $imgs;
 	}
 
 
 	public function getTablePatrocinadores($list=array()){
 		if(count($list)){
+			// verificar los permisos que tiene el usuario por comparación bitwise
+			$permisos = $_SESSION['grupoPermisos'];
+			$btnUp; 
+			$btnDel;
 			$table='
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped table-hover" id="listPatrocinadores">
@@ -130,6 +177,10 @@ class PatrocinadoresCtrl{
 						<tbody>';
 			
 			foreach ($list as $k => $v) {
+				// verificar los permisos que tiene el usuario por comparación bitwise
+				$btnUp = $permisos & 4 ? '<a href="patrocinadoresUpdate.php?patr='.$k.'"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>' : 'N/A';
+				$btnDel = $permisos & 8 ? '<a href="#" class="delete" data-idpatr="'.$k.'"><span class="glyphicon glyphicon-remove" aria-hidden="true" data-idPatr="okok"></span></a>' : 'N/A';
+				$img = is_file(PATH.'/'.$v['logoUrl'].'/'.$v['logoName']) ? '<img src="../../'.$v['logoUrl'].'/'.$v['logoName'].'" width="180" height="50" />' : 'sin imagen';
 				$slider = intval($v['sliderVisible']) ? 'Si' : 'No';
 				$table.='
 					<tr>
@@ -142,9 +193,9 @@ class PatrocinadoresCtrl{
 						<td>'.$v['facebook'].'</td>
 						<td>'.$v['twitter'].'</td>
 						<td>'.$slider.'</td>
-						<td><img src="../../'.$v['logoUrl'].'/'.$v['logoName'].'" width="180" height="50" /></td>
-						<td style="text-align:center;"><a href="patrocinadoresUpdate.php?patr='.$k.'"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
-						<td style="text-align:center;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+						<td>'.$img.'</td>
+						<td style="text-align:center;">'.$btnUp.'</td>
+						<td style="text-align:center;">'.$btnDel.'</td>
 					</tr>'; 
 			}
 			$table.='</tbody></table></div>';
@@ -162,6 +213,19 @@ class PatrocinadoresCtrl{
 			$fields = array('sliderOrder'=>$order);
 			$where = ' AND idPatrocinadores='.$id;
 			$res = $this->model->updatePatrocinador($fields, $where); // array('uno'=>$idEstado);
+			return $res;
+		}
+	}
+
+	/**
+	  * elimina (logicamente) al patrocinador dado
+	  * @param Int $id indica el id del patrocinador a eliminar
+	  **/
+	public function deletePatrocinador($id=0){
+		$id = intval($id);
+		if($id){		
+			$res = $this->model->deletePatrocinador($id);
+			$_SESSION["resSubmit"] = array('error' => 1, 'msg'=>'El patrocinador fue eliminado correctamente.', 'icon'=>'ok');
 			return $res;
 		}
 	}

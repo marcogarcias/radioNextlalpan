@@ -27,39 +27,53 @@ function inicioPagina(){ ?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161433718-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-161433718-1');
+</script>
+
 		<meta charset="UTF-8">
 		<meta property="fb:admins" content="100011228923509"/>
 		<title>RADIO NEXTLALPAN</title>
-		<link href="css/index.css" rel="stylesheet" />
+		<link href="public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="public/css/estilos.css" rel="stylesheet" />
 		<link rel="shortcut icon" href="img/varios/logoRadioIcono01.ico" type="image/x-icon" />
 		<script src="public/js/jquery-1.12.0.js"></script>
+		<script src="public/libs/bootstrap/js/bootstrap.min.js"></script>
 		<script src="public/js/SliderV1.js"></script>
 		<script src="public/js/index.js"></script>
+		<script src="public/js/Menu.js"></script>
 	</head>
 
 <body>
-<div id="fb-root"></div>
-<script>
+  <div id="fb-root"></div>
+  <script>
 
-// linkeado a la página de radionextlalpan
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+  // linkeado a la página de radionextlalpan 2016
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
-/*
-// linkeado a la página de facebook
-(function(d, s, id) {
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) return;
-	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5";
-	fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));*/
-</script>
+  /*
+  // linkeado a la página de facebook
+  (function(d, s, id) {
+  	var js, fjs = d.getElementsByTagName(s)[0];
+  	if (d.getElementById(id)) return;
+  	js = d.createElement(s); js.id = id;
+  	js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5";
+  	fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));*/
+  </script>
+  <!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v14.0" nonce="NcgXbJHR"></script> -->
 
 <div id="contenedor" align="center">
 	<table class="tablaContenedor" border="0" cellpadding="0" cellspacing="0">
@@ -110,10 +124,10 @@ function cabeceraBanner(){ ?>
 <!-- ENDS -->
 
 <!-- BEGINS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
-		<script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
+		<!-- <script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
 		<script type="text/javascript">
 			MRP.insert({
-				'url':'http://50.22.218.73:30713/;',
+				'url':'http://109.169.23.20:6111/;',
 				'lang':'es',
 				'codec':'mp3',
 				'volume':50,
@@ -126,8 +140,92 @@ function cabeceraBanner(){ ?>
 				'width':501,
 				'height':32
 			});
-		</script>
+		</script> -->
 <!-- ENDS -->
+
+<!-- EMPIEZA MIXSTREAM  (04/09/2019)
+		<script>
+		// MixStream Flash Player, http://mixstreamflashplayer.net/ 
+		var flashvars = {};flashvars.serverHost = "87.117.228.65:32621/;";flashvars.getStats = "1";flashvars.autoStart = "1";flashvars.textColour = "fffffff";flashvars.buttonColour = "009100";var params = {};params.bgcolor= "b80000";
+		</script>
+		<script type="text/javascript" src="http://mixstreamflashplayer.net/v1.3.js"></script>
+-->
+
+<!-- BEGINS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
+		<!-- <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="300" height="113">
+		<param name="movie" value="muses.swf" />
+		<param name="flashvars" value="url=http://109.169.23.20:6111/;&lang=auto&codec=mp3&volume=65&introurl=&autoplay=true&tracking=true&jsevents=true&buffering=3&skin=ffmp3-cristal.xml&title=RADIO%20NEXTLALPAN&welcome=WELCOME%20TO..." />
+		<param name="wmode" value="transparent" />
+		<param name="allowscriptaccess" value="always" />
+		<param name="scale" value="noscale" />
+		<embed src="muses.swf" flashvars="url=http://109.169.23.20:6111/;&lang=auto&codec=mp3&volume=65&introurl=&autoplay=true&tracking=true&jsevents=true&buffering=3&skin=ffmp3-cristal.xml&title=RADIO%20NEXTLALPAN&welcome=WELCOME%20TO..." width="300" scale="noscale" height="113" wmode="transparent" allowscriptaccess="always" type="application/x-shockwave-flash" />
+		</object> -->
+<!-- ENDS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
+<!--
+		<script>
+			// MixStream Flash Player, http://mixstreamflashplayer.net/
+			var flashvars = {};flashvars.serverHost = "162.210.196.145:36480/;";flashvars.getStats = "1";flashvars.autoStart = "1";flashvars.textColour = "fffffff";flashvars.buttonColour = "009100";var params = {};params.bgcolor= "b80000";
+		</script>
+		<script type="text/javascript" src="http://mixstreamflashplayer.net/v1.3.js"></script>
+-->
+<!-- 
+		<script>
+			// MixStream Flash Player, http://mixstreamflashplayer.net/ 
+			var flashvars = {};flashvars.serverHost = "198.7.59.204:29320/;";flashvars.getStats = "1";flashvars.autoStart = "1";flashvars.textColour = "fffffff";flashvars.buttonColour = "009100";var params = {};params.bgcolor= "b80000";
+		</script>
+		<script type="text/javascript" src="http://mixstreamflashplayer.net/v1.3.js"></script>
+-->
+<!--
+		<script>
+			// MixStream Flash Player, http://mixstreamflashplayer.net/ 
+			var flashvars = {};flashvars.serverHost = "78.129.224.21:22738/;";flashvars.getStats = "1";flashvars.autoStart = "1";flashvars.textColour = "fffffff";flashvars.buttonColour = "009100";var params = {};params.bgcolor= "b80000";
+		</script>
+		<script type="text/javascript" src="http://mixstreamflashplayer.net/v1.3.js"></script>
+-->
+		<!-- BEGINS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
+<!-- BEGINS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
+<!-- 
+<script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
+<script type="text/javascript">
+MRP.insert({
+'url':'http://78.129.222.62:21140/;',
+'codec':'mp3',
+'volume':50,
+'autoplay':true,
+'jsevents':true,
+'buffering':0,
+'title':'   RADIO NEXTLALPAN',
+'welcome':'DISFRUTA LA MÚSICA ',
+'wmode':'transparent',
+'skin':'minimal',
+'width':220,
+'height':80
+});
+</script>
+-->
+<!-- ENDS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
+<!-- ENDS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
+<!-- BEGINS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
+<script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
+<script type="text/javascript">
+/*MRP.insert({
+//'url':'http://109.169.76.104:12017/;',
+'url':'http://78.129.185.84:38582/;',
+'codec':'mp3',
+'volume':50,
+'autoplay':true,
+'jsevents':true,
+'buffering':0,
+'title':'   RADIO NEXTLALPAN',
+'welcome':'DISFRUTA LA MÚSICA ',
+'wmode':'transparent',
+'skin':'minimal',
+'width':220,
+'height':80
+});*/
+</script>
+<!-- ENDS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
+    <?php include($_SERVER['DOCUMENT_ROOT'].'/public/html/reproductor1/reproductor1.php'); ?>
 	</div>
 </div>
 <?php
@@ -154,13 +252,13 @@ function menuHorizontal(){
 	if(isset($_GET["sec"])){
 		$secGet=$_GET["sec"];
 		if($secGet=="index"){ ?>
-			<li><a href="index.php?sec=index#index" class="seccionA">INICIO</a></li> <?php }
+			<li><a href="index.php?sec=index#index" class="seccionA" id="inicio">INICIO</a></li> <?php }
 		else{ ?>
-			<li><a href="index.php?sec=index#index" class="seccion">INICIO</a></li> <?php }
+			<li><a href="index.php?sec=index#index" class="seccion" id="inicio">INICIO</a></li> <?php }
 		if($secGet=="programacion"){ ?>
-			<li><a href="programacion.php?sec=programacion#programacion" class="seccionA">PROGRAMACI&Oacute;N</a></li> <?php }
+			<li><a href="programacion.php?sec=programacion#programacion" class="seccionA" id="programacion">PROGRAMACI&Oacute;N</a></li> <?php }
 		else{ ?>
-			<li><a href="programacion.php?sec=programacion#programacion" class="seccion">PROGRAMACI&Oacute;N</a></li> <?php }
+			<li><a href="programacion.php?sec=programacion#programacion" class="seccion" id="programacion">PROGRAMACI&Oacute;N</a></li> <?php }
 		if($secGet=="galeria"){ ?>
 			<li><a href="javascript:;" class="seccionA">GALER&Iacute;A</a>
 				<ul>
@@ -178,32 +276,32 @@ function menuHorizontal(){
 				</ul>
 			</li> <?php }
 		if($secGet=="servicios"){ ?>
-			<li><a href="servicios.php?sec=servicios#servicios" class="seccionA">SERVICIOS</a></li> <?php }
+			<li><a href="servicios.php?sec=servicios#servicios" class="seccionA" id="servicios">SERVICIOS</a></li> <?php }
 		else{ ?>
-			<li><a href="servicios.php?sec=servicios#servicios" class="seccion">SERVICIOS</a></li> <?php }
+			<li><a href="servicios.php?sec=servicios#servicios" class="seccion" id="servicios">SERVICIOS</a></li> <?php }
 		if($secGet=="patrocinadores"){ ?>
-			<li><a href="patrocinadores.php?sec=patrocinadores#patrocinadores" class="seccionA">PATROCINADORES</a></li> <?php }
+			<li><a href="patrocinadores.php?sec=patrocinadores#patrocinadores" class="seccionA" id="patrocinadores">PATROCINADORES</a></li> <?php }
 		else{ ?>
-			<li><a href="patrocinadores.php?sec=patrocinadores#patrocinadores" class="seccion">PATROCINADORES</a></li> <?php }
+			<li><a href="patrocinadores.php?sec=patrocinadores#patrocinadores" class="seccion" id="patrocinadores">PATROCINADORES</a></li> <?php }
 		if($secGet=="facebook"){ ?>
-			<li><a href="facebook.php?sec=facebook#facebook" class="seccionA">FACEBOOK</a></li><?php }
+			<li><a href="facebook.php?sec=facebook#facebook" class="seccionA" id="facebook">FACEBOOK</a></li><?php }
 		else{ ?>
-			<li><a href="facebook.php?sec=facebook#facebook" class="seccion">FACEBOOK</a></li><?php }
+			<li><a href="facebook.php?sec=facebook#facebook" class="seccion" id="facebook">FACEBOOK</a></li><?php }
 		if($secGet=="comunidades"){ ?>
 			<!--<li><a href="comunidades.php?sec=comunidades#comunidades" class="seccionA">COMUNIDADES</a></li>--><?php }
 		else{ ?>
 			<!--<li><a href="comunidades.php?sec=comunidades#comunidades" class="seccion">COMUNIDADES</a></li>--> <?php }
 		if($secGet=="contacto"){ ?>
-			<li><a href="contacto.php?sec=contacto#contacto" class="seccionA">CONTACTOS</a></li> <?php }
+			<li><a href="contacto.php?sec=contacto#contacto" class="seccionA" id="contactos">CONTACTOS</a></li> <?php }
 		else{ ?>
-			<li><a href="contacto.php?sec=contacto#contacto" class="seccion">CONTACTOS</a></li> <?php } ?>
+			<li><a href="contacto.php?sec=contacto#contacto" class="seccion" id="contactos">CONTACTOS</a></li> <?php } ?>
 			<li style="float:right;">
 			</li> <?php
 			
 	}
 	else{ ?>
-		<li><a href="index.php?sec=index#index" class="seccion">INICIO</a></li>
-		<li><a href="programacion.php?sec=programacion#programacion" class="seccion">PROGRAMACI&Oacute;N</a></li>
+		<li><a href="index.php?sec=index#index" class="seccion" id="inicio">INICIO</a></li>
+		<li><a href="programacion.php?sec=programacion#programacion" class="seccion" id="programacion">PROGRAMACI&Oacute;N</a></li>
 		<li><a href="javascript:;" class="seccion">GALER&Iacute;A</a>
 			<ul>
 				<li><a href="javascript:;" class="seccion">FOTOS</a></li>
@@ -211,10 +309,10 @@ function menuHorizontal(){
 				<li><a href="javascript:;" class="seccion">PODCAST</a></li>
 			</ul>
 		</li>
-		<li><a href="servicios.php?sec=servicios#servicios" class="seccion">SERVICIOS</a></li>
-		<li><a href="patrocinadores.php?sec=patrocinadores#patrocinadores" class="seccion">PATROCINADORES</a></li>
-		<li><a href="facebook.php?sec=facebook#facebook" class="seccion">FACEBOOK</a></li>
-		<li><a href="contacto.php?sec=contacto#contacto" class="seccion">CONTACTOS</a></li>
+		<li><a href="servicios.php?sec=servicios#servicios" class="seccion" id="servicios">SERVICIOS</a></li>
+		<li><a href="patrocinadores.php?sec=patrocinadores#patrocinadores" class="seccion" id="patrocinadores">PATROCINADORES</a></li>
+		<li><a href="facebook.php?sec=facebook#facebook" class="seccion" id="facebook">FACEBOOK</a></li>
+		<li><a href="contacto.php?sec=contacto#contacto" class="seccion" id="contactos">CONTACTOS</a></li>
 		<li style="float:right;">
 		</li> <?php 
 	}
@@ -227,9 +325,14 @@ function menuHorizontal(){
 function comentarios_fb(){
 ?>
 	<div class="comentarios_fb">
-		<div id="fb-comments_" class="fb-comments" data-href="http://radionextlalpan.mx/" data-width="540" data-numposts="5" data-order-by="reverse_time"></div>
 		<!-- <div id="fb-comments_" class="fb-comments" data-href="https://www.facebook.com/profile.php?id=100011228923509" data-width="240" data-numposts="5" data-order-by="reverse_time"></div> -->
+		<div id="fb-comments_" class="fb-comments" data-href="http://radionextlalpan.mx/" data-width="540" data-numposts="5" data-order-by="reverse_time"></div>
 	</div>
+	<!-- 
+  <div class="comentarios_fb_v2">
+		<div class="fb-comments" data-href="https://radionextlalpan.mx/" data-width="600" data-numposts="20"></div>
+	</div>
+  -->
 <?php
 }
 
@@ -242,6 +345,9 @@ function finalPagina(){ ?>
 				?>
 			</td>
 		</tr>
+    <tr><td colspan="2">
+      <!-- <iframe src="http://www.ustream.tv/combined-embed/17390050?videos=gallery&videosCount=8&html5ui" style="border: 0 none transparent;"  webkitallowfullscreen allowfullscreen frameborder="no" width="100%" height="752"></iframe> -->
+    </td></tr>
 	</table>
 	<?php comentarios_fb(); ?>
 </div>
@@ -260,7 +366,7 @@ function galeriaDinamica01(){
 	?>
 	<div id="galDin00Div">
 		<div class="galeriaDinamica01Img">
-			<img src="public/img/varios/radioNextlalpan-cabina-middle.jpg" width="550" height="350" />
+			<img src="public/img/varios/radioNextlalpan-cabina-middle.jpg" />
 		</div>
 		<div id="galDinPie01" class="galeriaDinamica01Footer">
 			<span>Radio Nextlalpan</span>
@@ -334,16 +440,20 @@ else{
 <?php
 }
 
-function menuLateral(){ ?>
+function menuLateral(){ 
+  $web = 'public';
+  $img = $web.'/img'; ?>
 <div id="menuLateral">
-	<table border="0" cellpadding="0" cellspacing="0">
-	        <tr><td>
-	        	<script type="text/javascript" src="//ra.revolvermaps.com/0/0/6.js?i=0jp0cvsvny3&amp;m=7&amp;s=270&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
-		</td></tr>
-		<tr><td>
-			<!-- BANNERS -->
-		</td></tr>
-	</table>
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr><td>
+      <script type="text/javascript" src="//ra.revolvermaps.com/0/0/6.js?i=0jp0cvsvny3&amp;m=7&amp;s=270&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+    </td></tr>
+    <tr><td>
+      <a href="https://api.whatsapp.com/send?phone=525549187591" target="_blanck">
+        <img id="btn-whatsapp" src="<?php echo $img; ?>/general/rep-btn-whatsapp-3.png?<?php echo microtime(); ?>" title="Whatsapp" alt="Whatsapp">
+      </a>
+    </td></tr>
+  </table>
 </div>
 
 <?php

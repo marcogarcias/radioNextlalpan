@@ -1,6 +1,10 @@
 <?php
-require_once 'cfg.php';
-//require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/cfg.php';// 'cfg.php';
+$serv = $_SERVER['DOCUMENT_ROOT'];
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+require_once PATH.'/app/cfg.php';
+//require_once 'cfg.php';
 
 class Model{
 	protected $_db;
@@ -17,8 +21,8 @@ class Model{
 	}
 
 	public function close($param1=null, $param2=null){
-		//$param1 && ($param1->close());
-		//$param2 && ($param2->close());
+		$param1 && ($param1->close());
+		$param2 && ($param2->close());
 	}
 
 	public function insert($reg=array(), $table=null){
@@ -50,8 +54,8 @@ class Model{
 			//$res = array('sql'=>$sql);;
 			$res = $this->_db->query($sql);
 			$res = $res ? true : false;
-		}
-		return $res;
+		};
+		return array('res'=>$res);
 	}
 }
 ?>

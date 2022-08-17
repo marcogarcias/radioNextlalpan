@@ -1,6 +1,11 @@
 <?php session_start(); ?>
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/paths.php';
+$serv = $_SERVER['DOCUMENT_ROOT'];
+$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+$pathFile = $pathFile.'/app/paths.php';
+require_once $pathFile;
+//require_once 'app/paths.php';
+
 $appPath = PATH.'/app';
 $ctrlPath = PATH.'/app/controller';
 require_once $appPath.'/Utils.php';
@@ -16,6 +21,10 @@ if(isset($_POST) && isset($_POST['patrocinador'])){
 	$loginCtrl->checkActiveSessionCtrl('login');
 
 $patr = new PatrocinadoresCtrl();
+// verificar los permisos que tiene el usuario por comparación bitwise
+$update = ($_SESSION['grupoPermisos'] & 4);
+$disabled = $update ? '' : 'disabled';
+
 $tableCont = Utils::getListForTable($patr);
 
 $error = isset($_SESSION["resSubmit"]['error']) ? $_SESSION["resSubmit"]['error'] : null;
@@ -39,7 +48,7 @@ $tableCont = array(
 
 Utils::getHeaderAdmin('RADIO NEXTLALPAN - management');
 Utils::getNavAdmin('patrocinadores', 'order');
-$table = Utils::getTableSorteable($tableCont);
+$table = $update ? Utils::getTableSorteable($tableCont) : 'No tienes permisos para visualizar esta sección.';
 ?>
 
 <section>
@@ -60,7 +69,7 @@ $table = Utils::getTableSorteable($tableCont);
 					<div class="panel-heading"><strong>Ordenar imágenes del slider</strong></div>
 					<div class="panel-body">
 					<?php echo $table; ?>
-					<button id="btnSaverOrder" class="btn btn-primary">Guardar orden</button>
+					<button id="btnSaverOrder" class="btn btn-primary" <?php echo $disabled;?>>Guardar orden</button>
 					</div>
 				</div>
 			</div>
@@ -112,7 +121,7 @@ $(document).ready(function(){
 			console.log(idx);
 		});*/
 		var count = 1;
-		var totalRow = $("#slider1Order tbody").children().length;
+		var totalRow = $("#slider1Order tbody").children().length-1;
 		var msg = { false:{ 'class': 'danger', 'icon':'remove', 'msg':'Ocurrió un error, no se pudo cambiar el orden de los patrocinadores.' },
 					true:{ 'class': 'success', 'icon':'ok', 'msg':'El orden de los patrocinadores cambió correctamente.' }};
 		var result = true;
@@ -123,17 +132,17 @@ $(document).ready(function(){
 		$("#slider1Order tbody tr").each(function (index) {
 			var id = $(this).data('idrow');
 			var order = $(this).find('.priority').text();
-			$.ajax({
-				dataType: "json",
-				data: {'func':'updateOrderSlider1', 'param1':id, 'param2':order},
-				url:   'ajaxAdmin.php',
-				type:  'post',
-				beforeSend: function(){
-					// lo que se hará antes de mandar la petición ajax
-				},
-				success: function(res){
-					// orden guardado
-					if(id){
+			if(id){
+				$.ajax({
+					dataType: "json",
+					data: {'func':'updateOrderSlider1', 'param1':id, 'param2':order},
+					url:   'ajaxAdmin.php',
+					type:  'post',
+					beforeSend: function(){
+						// lo que se hará antes de mandar la petición ajax
+					},
+					success: function(res){
+						// si ya se actualizó hasta el último registro y solo hasta el último registro se muestra el mensaje de éxito o error.
 						result && (result = res);
 						if(totalRow==count){
 							msgDiv = msgDiv.replace('#class#', msg[result].class);
@@ -141,31 +150,14 @@ $(document).ready(function(){
 							msgDiv = msgDiv.replace('#icon#', msg[result].icon);
 							$('#msg').empty().html(msgDiv);
 						}
+						count++;
+					},
+					error:    function(xhr,err){
+						console.log("Ocurrio un error, intentelo nuevamente:", xhr);
 					}
-					count++;
-				},
-				error:    function(xhr,err){
-					console.log("Ocurrio un error, intentelo nuevamente:", xhr);
-				}
-			});	
+				});
+			}
 		});
-
-		//$('.alert').fadeIn('100000', function(){ console.log('momo'); });
-		/*$.ajax({
-			dataType: 'json',
-			data: {'func':'saveOrderSlider1', 'param1': '', 'param2':''},
-			url: 'ajaxAdmin.php',
-			type: 'post',
-			beforeSend: function(){
-
-			},
-			success: function(res){
-
-			},
-			error: function(xhr, err)(
-
-			)
-		});*/
 	});
 
 	$('.logoPatrocinador').on('click', function(){
