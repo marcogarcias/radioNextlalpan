@@ -1,8 +1,13 @@
 <?php
-$serv = $_SERVER['DOCUMENT_ROOT'];
+/*$serv = $_SERVER['DOCUMENT_ROOT'];
 $pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
 $pathFile = $pathFile.'/app/paths.php';
-require_once $pathFile;
+require_once $pathFile;*/
+
+if($_SERVER['SERVER_NAME'] == "localhost")
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}/radioNextlalpan");
+else
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}");
 
 $func = isset($_POST['func']) && $_POST['func'] ? $_POST['func'] : 'sinDefinir';
 
@@ -46,8 +51,8 @@ function getMunicipiosOptions($idEstado, $idMunicipio=null){
 }
 
 function getMunicipios($idEstado){
-	require_once PATH.'/app/Utils.php';
-	require_once PATH.'/app/model/CatalogMd.php';
+	require_once ROOT_PATH.'/app/Utils.php';
+	require_once ROOT_PATH.'/app/model/CatalogMd.php';
 	$catalog = new CatalogMd();
 	$municipios = $catalog->getMunicipiosByEstado($idEstado, null, 'idMunicipio'); // array('uno'=>$idEstado);
 	//$municipios = array('res'=>getcwd());
@@ -64,8 +69,8 @@ function updateOrderSlider1($id=0, $order=0){
 	$id = intval($id);
 	$order = intval($order);
 	if($id && $order){
-		require_once PATH.'/app/Utils.php';
-		require_once PATH.'/app/controller/patrocinadores/PatrocinadoresCtrl.php';
+		require_once ROOT_PATH.'/app/Utils.php';
+		require_once ROOT_PATH.'/app/controller/patrocinadores/PatrocinadoresCtrl.php';
 	
 		$patr = new PatrocinadoresCtrl();
 		$res = $patr->updateOrderSlider1($id, $order); // array('uno'=>$idEstado);
@@ -80,8 +85,8 @@ function updateOrderSlider1($id=0, $order=0){
 function deletePatrocinador($idPatr=0){
 	$idPatr = intval($idPatr);
 	if($idPatr){
-		require_once PATH.'/app/Utils.php';
-		require_once PATH.'/app/controller/patrocinadores/PatrocinadoresCtrl.php';
+		require_once ROOT_PATH.'/app/Utils.php';
+		require_once ROOT_PATH.'/app/controller/patrocinadores/PatrocinadoresCtrl.php';
 	
 		$patr = new PatrocinadoresCtrl();
 		$res = $patr->deletePatrocinador($idPatr);

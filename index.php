@@ -1,10 +1,14 @@
 ﻿<?php
-$serv = $_SERVER['DOCUMENT_ROOT'];
-$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
-$pathFile = $pathFile.'/app/paths.php';
-require_once $pathFile;
+if($_SERVER['SERVER_NAME'] == "localhost"){
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}/radioNextlalpan");
+}else{
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}");
+}
+//$serv = $_SERVER['DOCUMENT_ROOT'];
+//$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+//require_once $pathFile;
 //require_once $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan/app/paths.php';// 'app/paths.php';
-include(PATH."/php/librerias.php");
+include(ROOT_PATH."/php/librerias.php");
 echo inicioPagina();
 ?>
 <div id="contenido" class="contenido">

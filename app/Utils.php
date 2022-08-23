@@ -380,7 +380,7 @@ class Utils{
 	  * @param Object $obj indica un objeto de la clase Patrocinadores, si no
 	  * 	se indica se crea.
 	  */
-	public function getListForTable($obj=null){
+	public static function getListForTable($obj=null){
 		$obj = $obj ? $obj : $patr = new PatrocinadoresCtrl();
 		$imgMin;
 		$tableCont = array(

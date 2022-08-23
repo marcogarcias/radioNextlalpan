@@ -225,7 +225,7 @@ MRP.insert({
 });*/
 </script>
 <!-- ENDS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
-    <?php include($_SERVER['DOCUMENT_ROOT'].'/public/html/reproductor1/reproductor1.php'); ?>
+    <?php include(ROOT_PATH."/public/html/reproductor1/reproductor1.php"); ?>
 	</div>
 </div>
 <?php
@@ -444,15 +444,21 @@ function menuLateral(){
   $web = 'public';
   $img = $web.'/img'; ?>
 <div id="menuLateral">
-  <table border="0" cellpadding="0" cellspacing="0">
-    <tr><td>
-      <script type="text/javascript" src="//ra.revolvermaps.com/0/0/6.js?i=0jp0cvsvny3&amp;m=7&amp;s=270&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
-    </td></tr>
-    <tr><td>
-      <a href="https://api.whatsapp.com/send?phone=525549187591" target="_blanck">
-        <img id="btn-whatsapp" src="<?php echo $img; ?>/general/rep-btn-whatsapp-3.png?<?php echo microtime(); ?>" title="Whatsapp" alt="Whatsapp">
-      </a>
-    </td></tr>
+  <table>
+    <tr>
+      <td>
+        <script type="text/javascript" src="//ra.revolvermaps.com/0/0/6.js?i=0jp0cvsvny3&amp;m=7&amp;s=270&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="btn-whatsapp-cont">
+          <a href="https://api.whatsapp.com/send?phone=525549187591" target="_blanck">
+            <img id="btn-whatsapp" src="<?php echo $img; ?>/general/rep-btn-whatsapp-3.png?<?php echo microtime(); ?>" title="Whatsapp" alt="Whatsapp">
+          </a>
+        </div>
+      </td>
+    </tr>
   </table>
 </div>
 

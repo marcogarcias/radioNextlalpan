@@ -1,13 +1,18 @@
 <?php session_start(); ?>
 <?php
-$serv = $_SERVER['DOCUMENT_ROOT'];
+/*$serv = $_SERVER['DOCUMENT_ROOT'];
 $pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
 $pathFile = $pathFile.'/app/paths.php';
-require_once $pathFile;
+require_once $pathFile;*/
 //require_once 'app/paths.php';
 
-$appPath = PATH.'/app';
-$ctrlPath = PATH.'/app/controller';
+if($_SERVER['SERVER_NAME'] == "localhost")
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}/radioNextlalpan");
+else
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}");
+
+$appPath = ROOT_PATH.'/app';
+$ctrlPath = ROOT_PATH.'/app/controller';
 require_once $appPath.'/Utils.php';
 require_once $ctrlPath.'/login/LoginCtrl.php';
 require_once $ctrlPath.'/patrocinadores/PatrocinadoresCtrl.php';

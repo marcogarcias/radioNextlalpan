@@ -1,14 +1,19 @@
 <?php session_start(); ?>
 <?php
-$serv = $_SERVER['DOCUMENT_ROOT'];
+/*$serv = $_SERVER['DOCUMENT_ROOT'];
 $pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
 $pathFile = $pathFile.'/app/paths.php';
-require_once $pathFile;
+require_once $pathFile;*/
 
-require_once PATH.'/app/Utils.php';
-require_once PATH.'/app/model/CatalogMd.php';
-require_once PATH.'/app/controller/login/LoginCtrl.php';
-require_once PATH.'/app/controller/patrocinadores/PatrocinadoresCtrl.php';
+if($_SERVER['SERVER_NAME'] == "localhost")
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}/radioNextlalpan");
+else
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}");
+
+require_once ROOT_PATH.'/app/Utils.php';
+require_once ROOT_PATH.'/app/model/CatalogMd.php';
+require_once ROOT_PATH.'/app/controller/login/LoginCtrl.php';
+require_once ROOT_PATH.'/app/controller/patrocinadores/PatrocinadoresCtrl.php';
 
 $catalog = new CatalogMd();
 $estados = $catalog->getEstados(null, null, null, 'idEstado');

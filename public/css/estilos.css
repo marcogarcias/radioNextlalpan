@@ -4,8 +4,9 @@ height: 100%;
 
 body{
 	/*background: #eee url(../img/varios/logoGFondo03.png);*/
-	background: #e0f9d1;
+	/*background: #e0f9d1;*/
 	/*cursor: url(../img/varios/logoGCursor01.cur), url(../img/varios/logoGCursor01.ani), url(../img/varios/logoGCursor01.gif), auto;*/
+  background: #002E3B;
 	font-size: 16px;
 	height: 100%;
 }
@@ -155,8 +156,14 @@ body{
 	vertical-align: top;
 }
 
+#btn-whatsapp-cont{
+  margin: auto;
+  padding-top: 50px;
+  width: 60%;
+}
+
 #btn-whatsapp{
-	width: 30%;
+	width: 100%;
 }
 
 #fb-comments_{

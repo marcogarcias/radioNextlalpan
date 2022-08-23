@@ -1,10 +1,10 @@
 <?php
 
-$serv = $_SERVER['DOCUMENT_ROOT'];
-$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+//$serv = $_SERVER['DOCUMENT_ROOT'];
+//$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
 
 // path raiz del proyecto
-define('PATH', $pathFile);
+define('PATH', $serv);
 // nombre del proyecto
 //define('PROJECT', 'radioNextlalpan');
 

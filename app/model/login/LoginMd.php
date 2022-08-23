@@ -1,10 +1,15 @@
 <?php
-$serv = $_SERVER['DOCUMENT_ROOT'];
-$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
-$pathFile = $pathFile.'/app/paths.php';
-require_once $pathFile;
+//$serv = $_SERVER['DOCUMENT_ROOT'];
+//$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+//$pathFile = $pathFile.'/app/paths.php';
+//require_once $pathFile;
 
-require_once PATH.'/app/Model.php';
+if($_SERVER['SERVER_NAME'] == "localhost"){
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}/radioNextlalpan");
+}else{
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}");
+}
+require_once ROOT_PATH.'/app/Model.php';
 
 class LoginMd extends Model{
 	public function __construct(){

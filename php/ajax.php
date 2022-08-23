@@ -1,8 +1,13 @@
 <?php
-$serv = $_SERVER['DOCUMENT_ROOT'];
-$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
-$pathFile = $pathFile.'/app/paths.php';
-require_once $pathFile;
+if($_SERVER['SERVER_NAME'] == "localhost"){
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}/radioNextlalpan");
+}else{
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}");
+}
+//$serv = $_SERVER['DOCUMENT_ROOT'];
+//$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+//$pathFile = $pathFile.'/app/paths.php';
+//require_once $pathFile;
 //require_once '../app/paths.php';
 
 $func = isset($_POST['func']) && $_POST['func'] ? $_POST['func'] : 'sinDefinir';
@@ -34,9 +39,9 @@ function goFunction($func){
   */
 function getImgsPatrocinadores(){
 	//require_once '../app/controller/patrocinadores/PatrocinadoresCtrl.php';
-	require_once PATH.'/app/controller/patrocinadores/PatrocinadoresCtrl.php';
+	require_once ROOT_PATH.'/app/controller/patrocinadores/PatrocinadoresCtrl.php';
 	//require_once '../app/Utils.php';
-	require_once PATH.'/app/Utils.php';
+	require_once ROOT_PATH.'/app/Utils.php';
 	$patrocinadores = new PatrocinadoresCtrl();
 	$cols = 'p.logoName, p.logoUrl, p.sliderOrder';
 	$filter = 'AND p.sliderVisible=1 ORDER BY p.sliderOrder ASC';

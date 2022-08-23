@@ -1,12 +1,17 @@
 <?php session_start(); ?>
 <?php
-$serv = $_SERVER['DOCUMENT_ROOT'];
+/*$serv = $_SERVER['DOCUMENT_ROOT'];
 $pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
 $pathFile = $pathFile.'/app/paths.php';
-require_once $pathFile;
+require_once $pathFile;*/
 
-$appPath = PATH.'/app';
-$ctrlPath = PATH.'/app/controller';
+if($_SERVER['SERVER_NAME'] == "localhost")
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}/radioNextlalpan");
+else
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}");
+
+$appPath = ROOT_PATH.'/app';
+$ctrlPath = ROOT_PATH.'/app/controller';
 require_once $appPath.'/Utils.php';
 require_once $appPath.'/model/CatalogMd.php';
 require_once $ctrlPath.'/login/LoginCtrl.php';
@@ -33,7 +38,7 @@ $patr = new PatrocinadoresCtrl();
 $id = $_GET['patr'];
 $data = $patr->getAllPatrocinadores($id);
 $data = isset($data[$id]) ? $data[$id] : null;
-$urlImg = PATH.'/'.$data['logoUrl'].'/'.$data['logoName'];
+$urlImg = ROOT_PATH.'/'.$data['logoUrl'].'/'.$data['logoName'];
 $imgExist = is_file($urlImg);
 
 

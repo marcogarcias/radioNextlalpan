@@ -1,9 +1,14 @@
 <?php
-$serv = $_SERVER['DOCUMENT_ROOT'];
-$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
-$pathFile = $pathFile.'/app/paths.php';
-require_once $pathFile;
-require_once PATH.'/app/model/patrocinadores/PatrocinadoresMd.php';
+//$serv = $_SERVER['DOCUMENT_ROOT'];
+//$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
+//$pathFile = $pathFile.'/app/paths.php';
+//require_once $pathFile;
+if($_SERVER['SERVER_NAME'] == "localhost"){
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}/radioNextlalpan");
+}else{
+  defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}");
+}
+require_once ROOT_PATH.'/app/model/patrocinadores/PatrocinadoresMd.php';
 //require_once '../app/model/patrocinadores/PatrocinadoresMd.php';
 
 class PatrocinadoresCtrl{
@@ -42,7 +47,7 @@ class PatrocinadoresCtrl{
 
 			// comprobando si se subió alguna imagen del logo del patrocinador
 			$file_ = isset($file['logo']) && $file['logo'] ? $file['logo'] : null;
-			$dirTo = PATH.'/public/img/patrocinadores';
+			$dirTo = ROOT_PATH.'/public/img/patrocinadores';
 			$rules =array('formats'=>'image/jpeg', 'sizeMaxKb'=>2048, 'dimensionsMin'=>'200|200', 'dimensionsMax'=>'1800|1800', 'resize'=>'990|300');
 			$resFile = Utils::updateFile($file_, $dirTo, $rules);
 			$success = (isset($resFile['res']) && $resFile['res']==1 && isset($resFile['success']) && is_array($resFile['success'])) ? $resFile['success'] : false;
@@ -111,7 +116,7 @@ class PatrocinadoresCtrl{
 			$file_ = isset($file['logo']) && $file['logo'] ? $file['logo'] : null;
 			$changeImage = is_file($file_['tmp_name']);
 			if($changeImage){
-				$dirTo = PATH.'/public/img/patrocinadores';
+				$dirTo = ROOT_PATH.'/public/img/patrocinadores';
 				$rules =array('formats'=>'image/jpeg', 'sizeMaxKb'=>2048, 'dimensionsMin'=>'200|200', 'dimensionsMax'=>'1800|1800', 'resize'=>'990|300');
 				$resFile = Utils::updateFile($file_, $dirTo, $rules);
 				$success = (isset($resFile['res']) && $resFile['res']==1 && isset($resFile['success']) && is_array($resFile['success'])) ? $resFile['success'] : false;
@@ -180,7 +185,7 @@ class PatrocinadoresCtrl{
 				// verificar los permisos que tiene el usuario por comparación bitwise
 				$btnUp = $permisos & 4 ? '<a href="patrocinadoresUpdate.php?patr='.$k.'"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>' : 'N/A';
 				$btnDel = $permisos & 8 ? '<a href="#" class="delete" data-idpatr="'.$k.'"><span class="glyphicon glyphicon-remove" aria-hidden="true" data-idPatr="okok"></span></a>' : 'N/A';
-				$img = is_file(PATH.'/'.$v['logoUrl'].'/'.$v['logoName']) ? '<img src="../../'.$v['logoUrl'].'/'.$v['logoName'].'" width="180" height="50" />' : 'sin imagen';
+				$img = is_file(ROOT_PATH.'/'.$v['logoUrl'].'/'.$v['logoName']) ? '<img src="../../'.$v['logoUrl'].'/'.$v['logoName'].'" width="180" height="50" />' : 'sin imagen';
 				$slider = intval($v['sliderVisible']) ? 'Si' : 'No';
 				$table.='
 					<tr>
