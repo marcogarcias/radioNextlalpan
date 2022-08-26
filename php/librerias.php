@@ -348,8 +348,12 @@ function finalPagina(){ ?>
     <tr><td colspan="2">
       <!-- <iframe src="http://www.ustream.tv/combined-embed/17390050?videos=gallery&videosCount=8&html5ui" style="border: 0 none transparent;"  webkitallowfullscreen allowfullscreen frameborder="no" width="100%" height="752"></iframe> -->
     </td></tr>
+    <tr>
+      <td>
+        <?php comentarios_fb(); ?>
+      </td>
+    </tr>
 	</table>
-	<?php comentarios_fb(); ?>
 </div>
 <?php
 	pieDePagina();
