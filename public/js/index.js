@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 		},
 		success: function(res){
-			console.log('res: ', res);
+			//console.log('res: ', res);
 			var logoUrl = '';
 			var logoName = '';
 			var logoUrlFull = '';

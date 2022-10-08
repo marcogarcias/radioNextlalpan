@@ -5,10 +5,13 @@ $pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan'
 $pathFile = $pathFile.'/app/paths.php';
 require_once $pathFile;*/
 
-if($_SERVER['SERVER_NAME'] == "localhost")
+if($_SERVER['SERVER_NAME'] == "localhost"){
   defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}/radioNextlalpan");
-else
+  defined("URL_PATH") || define('URL_PATH', "http://{$_SERVER['HTTP_HOST']}/radioNextlalpan");
+}else{
   defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}");
+  defined("URL_PATH") || define('URL_PATH', "http://{$_SERVER['HTTP_HOST']}");
+}
 
 $appPath = ROOT_PATH.'/app';
 $ctrlPath = ROOT_PATH.'/app/controller';

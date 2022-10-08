@@ -7,8 +7,10 @@ if(session_id() == '') session_start();
 //require_once $pathFile;
 if($_SERVER['SERVER_NAME'] == "localhost"){
   defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}/radioNextlalpan");
+  defined("URL_PATH") || define('URL_PATH', "http://{$_SERVER['HTTP_HOST']}/radioNextlalpan");
 }else{
   defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}");
+  defined("URL_PATH") || define('URL_PATH', "http://{$_SERVER['HTTP_HOST']}");
 }
 require_once ROOT_PATH.'/app/model/login/LoginMd.php';
 

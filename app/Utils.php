@@ -15,15 +15,15 @@ class Utils{
 				<meta charset="UTF-8" />
 				<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 				<title>SECCION DE ADMINISTRADOR</title>
-				<link href="../../public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+				<link href="<?php echo URL_PATH; ?>/public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 				<!-- <link href="../../css/galDinAdmin01.css" rel="stylesheet" /> -->
-				<link href="../../public/css/adm.css" rel="stylesheet" />
+				<link href="<?php echo URL_PATH; ?>/public/css/adm.css" rel="stylesheet" />
 				<link rel="shortcut.icon" href="img/varios/logoRadioIcono01.ico" type="image/x-icon" />
-				<script src="../../public/js/jquery-1.12.0.js"></script>
-				<script src="../../public/libs/bootstrap/js/bootstrap.min.js"></script>
-				<script src="../../public/libs/jquery.ui/jquery-ui.min.js"></script>
-				<script src="../../public/js/Form.js"></script>
-				<script src="../../public/js/adm.js"></script>
+				<script src="<?php echo URL_PATH; ?>/public/js/jquery-1.12.0.js"></script>
+				<script src="<?php echo URL_PATH; ?>/public/libs/bootstrap/js/bootstrap.min.js"></script>
+				<script src="<?php echo URL_PATH; ?>/public/libs/jquery.ui/jquery-ui.min.js"></script>
+				<script src="<?php echo URL_PATH; ?>/public/js/Form.js"></script>
+				<script src="<?php echo URL_PATH; ?>/public/js/adm.js"></script>
 			</head>	
 	<?php
 	}
@@ -47,18 +47,76 @@ class Utils{
 	 * @param String $sec indica la sección activa
 	 */
 	public static function getNavAdmin($sec=null, $subSec=null, $param1=null){
-		$menu = array('dashboard'=>array('title'=>'Dashboard', 'url'=>'index.php'),
-			'patrocinadores'=>array('title'=>'Patrocinadores', 'dropdown'=>
-														array('addPatrocinadores'=>array('title'=>'Agregar', 'url'=>'patrocinadoresAdd.php'),
-															'listPatrocinadores'=>array('title'=>'Listar', 'url'=>'patrocinadoresList.php'),
-															'order'=>array('title'=>'Modificar orden', 'url'=>'patrocinadoresChangeOrder.php'))),
-			'slider'=>array('title'=>'Slider Principal', 'dropdown'=>
-														array('add'=>array('title'=>'Agregar', 'url'=>'#'),
-															'list'=>array('title'=>'Listar', 'url'=>'#'),
-															'order'=>array('title'=>'Modificar orden', 'url'=>'#'))),
-			'programacion'=>array('title'=>'Programación', 'dropdown'=>
-														array('add'=>array('title'=>'Agregar', 'url'=>'#'),
-															'list'=>array('title'=>'Listar', 'url'=>'#'))));
+		$menu = array(
+      'dashboard'=>array(
+        'title'=>'Dashboard', 
+        'url'=>'index.php'
+      ),
+			'patrocinadores'=>array(
+        'title'=>'Patrocinadores', 
+        'dropdown'=>array(
+          'addPatrocinadores'=>array(
+            'title'=>'Agregar', 
+            'url'=>URL_PATH.'/php/administracion/patrocinadoresAdd.php'
+          ),
+					'listPatrocinadores'=>array(
+            'title'=>'Listar', 
+            'url'=>URL_PATH.'/php/administracion/patrocinadoresList.php'
+          ),
+					'order'=>array(
+            'title'=>'Modificar orden', 
+            'url'=>URL_PATH.'/php/administracion/patrocinadoresChangeOrder.php'
+          )
+        )
+      ),
+      'locutores'=>array(
+        'title'=>'Locutores', 
+        'dropdown'=>array(
+          'addLocutores'=>array(
+            'title'=>'Agregar', 
+            'url'=>URL_PATH.'/php/administracion/locutores/add.php'
+          ),
+					'listLocutores'=>array(
+            'title'=>'Listar', 
+            'url'=>URL_PATH.'/php/administracion/locutores/list.php'
+          ),
+					'order'=>array(
+            'title'=>'Modificar orden', 
+            'url'=>URL_PATH.'/php/administracion/locutores/changeOrder.php'
+          )
+        )
+      ),
+			'slider'=>array(
+        'title'=>'Slider Principal', 
+        'dropdown'=>array(
+          'add'=>array(
+            'title'=>'Agregar', 
+            'url'=>'#'
+          ),
+					'list'=>array(
+            'title'=>'Listar', 
+            'url'=>'#'
+          ),
+					'order'=>array(
+            'title'=>'Modificar orden', 
+            'url'=>'#'
+          )
+        )
+      ),
+			'programacion'=>array(
+        'title'=>'Programación', 
+        'dropdown'=>array(
+          'add'=>array(
+            'title'=>'Agregar', 
+            'url'=>'#'
+          ),
+					'list'=>array(
+            'title'=>'Listar', 
+            'url'=>'#'
+          )
+        )
+      )
+    );
 	 ?>
 	 	<nav>
 			<ul class="nav nav-pills">
@@ -205,7 +263,6 @@ class Utils{
 		$dimMin = isset($rules['dimensionsMin']) && $rules['dimensionsMin'] ? $rules['dimensionsMin'] : '10|10';
 		$dimMax = isset($rules['dimensionsMax']) && $rules['dimensionsMax'] ? $rules['dimensionsMax'] : '2500|2500';
 		$resize = isset($rules['resize']) && $rules['resize'] ? $rules['resize'] : '990|300';
-
 		if($file && $dirTo){
 			if(is_uploaded_file($fileTmp)){
 				if(is_file($fileTmp)){
@@ -242,7 +299,7 @@ class Utils{
 	 * @param String $dimMax indica el ancho/alto máximo de la imagen separados por el símbolo pipe
 	 * @param String $file indica la ruta y nombre del archivo a subir
 	 */
-	public function checkDimensions($dimMin='10|10', $dimMax='2500|2500', $file=null){
+	public static function checkDimensions($dimMin='10|10', $dimMax='2500|2500', $file=null){
 		$dimMin || $dimMin='10|10';
 		$dimMax || $dimMax='2500|2500';
 		$res = false;
@@ -275,7 +332,7 @@ class Utils{
 	 * @param String $height indica el alto al cual se redimencionará la imagen
 	 *
 	 */
-	public function resizeImage($file = null, $resize=null){
+	public static function resizeImage($file = null, $resize=null){
 		$resize || $resize = '900|300';
 		if(is_file($file)){
 			$destiny = $file;

@@ -1,8 +1,11 @@
 <?php
+
 if($_SERVER['SERVER_NAME'] == "localhost"){
   defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}/radioNextlalpan");
+  defined("URL_PATH") || define('URL_PATH', "http://{$_SERVER['HTTP_HOST']}/radioNextlalpan");
 }else{
   defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}");
+  defined("URL_PATH") || define('URL_PATH', "http://{$_SERVER['HTTP_HOST']}");
 }
 //$serv = $_SERVER['DOCUMENT_ROOT'];
 //$pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan';
@@ -20,9 +23,13 @@ goFunction($func);
  */
 function goFunction($func){
 	switch ($func) {
-		case 'getImgsPatrocinadores':
+		case "getImgsPatrocinadores":
 			$json = getImgsPatrocinadores();
 			break;
+    
+    case "getImgsLocutores":
+      $json = getImgsLocutores();
+      break;
 	
 		default:
 			$json = sinDefinir();
@@ -48,6 +55,20 @@ function getImgsPatrocinadores(){
 	$imgs = $patrocinadores->getImgsSlider1Actives(null, $cols, $filter);
 	return $imgs;
 }
+
+/**
+  * obtiene los registros de los locutores
+  *
+  */
+  function getImgsLocutores(){
+    require_once ROOT_PATH.'/app/controller/locutores/LocutoresCtrl.php';
+    require_once ROOT_PATH.'/app/Utils.php';
+    $loc = new LocutoresCtrl();
+    $cols = 'l.image, l.path, l.sliderOrder';
+    $filter = 'AND l.sliderVisible=1 ORDER BY l.sliderOrder ASC';
+    $imgs = $loc->getImgsSlider1Actives(null, $cols, $filter);
+    return $imgs;
+  }
 
 function sinDefinir(){
 	return array('res'=>'función sin definir');

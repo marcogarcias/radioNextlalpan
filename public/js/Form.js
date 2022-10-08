@@ -23,6 +23,19 @@ Form_.atOnInitPatrocinadorAdd = function(idForm){
 		k.keyCode == 13 && _this.atChekForm(idForm);
 	});
 };
+
+Form_.atOnInitAdd = function(cfg){
+	let _this = this;
+
+  let idForm = cfg["idForm"] ? cfg["idForm"] : "";
+	$(`#${idForm} :input:first`).focus();
+	$(`#${idForm}Btn`).on('click', function(){
+		_this.atChekForm(idForm);
+	});
+	$(`#${idForm} input`).keydown(function(k){
+		k.keyCode == 13 && _this.atChekForm(idForm);
+	});
+};
 /**
   * valida formularios de espacios vacios, formatos correctos de correo electrónico, etc
   * Para validar que un campo no esté vacio (requerido) se tiene que poner en el input el atributo "data-notnull='1'",

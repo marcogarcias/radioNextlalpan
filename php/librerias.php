@@ -18,8 +18,11 @@ function obtenerDatosComunicado($idCom){
 }
 
 function obtenerDatosCarrusel(){
-	conexion();
-	$datosCarrusel=mysql_query("CALL datosCarrusel();") or die("Error al invocar el SP. Detalles del error: ".mysql_error());
+  $model = new LocutoresMd(); 
+  $cols = 'l.idLocutor, l.nombre, l.nombre2, l.ap, l.am, l.path, l.image, l.sliderVisible, l.register' ;
+  $datosCarrusel = $model->getLocutores(null, "i.path, i.pathimage", null, 'idLocutor');
+	//conexion();
+	//$datosCarrusel=mysql_query("CALL datosCarrusel();") or die("Error al invocar el SP. Detalles del error: ".mysql_error());
 	return $datosCarrusel; 
 }
 
@@ -46,6 +49,7 @@ function inicioPagina(){ ?>
 		<script src="public/js/jquery-1.12.0.js"></script>
 		<script src="public/libs/bootstrap/js/bootstrap.min.js"></script>
 		<script src="public/js/SliderV1.js"></script>
+    <script src="public/js/sliderLocutores.js"></script>
 		<script src="public/js/index.js"></script>
 		<script src="public/js/Menu.js"></script>
 	</head>
@@ -53,7 +57,8 @@ function inicioPagina(){ ?>
 <body>
   <div id="fb-root"></div>
   <script>
-
+  let urlGlobal = "<?php echo URL_PATH; ?>";
+  
   // linkeado a la página de radionextlalpan 2016
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -368,7 +373,8 @@ function galeriaDinamica01(){
 	$sliderV2 = new SliderCtrl();
 	$res = $sliderV2->getAllImgsCtrl();*/
 	?>
-	<div id="galDin00Div">
+	<!--
+  <div id="galDin00Div">
 		<div class="galeriaDinamica01Img">
 			<img src="public/img/varios/radioNextlalpan-cabina-middle.jpg" />
 		</div>
@@ -376,6 +382,27 @@ function galeriaDinamica01(){
 			<span>Radio Nextlalpan</span>
 		</div>
 	</div>
+  -->
+  <?php 
+  $urlCarrusel = URL_PATH."/public/img/locutores";
+  ?>
+  <div id="carousel-locutores" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators"></ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox"></div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-locutores" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-locutores" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 <?php
 /*conexion();
 $datosCarrusel;
@@ -435,12 +462,12 @@ else{
 					del nombramientode Axapusco como Pueblo con Encanto el 12 de Marzo de 2013.</span>
 				</div>
 			</div>
-			-->
+			
 		</div>
 		<div id="galDinNavegacion">
 			<div id="galDinNavegacionBot01" onclick="galDinCambiarImg(1);">&nbsp;</div><div id="galDinNavegacionBot02" onclick="galDinCambiarImg(2);">&nbsp;</div><div id="galDinNavegacionBot03" onclick="galDinCambiarImg(3);">&nbsp;</div><div id="galDinNavegacionBot04" onclick="galDinCambiarImg(4);">&nbsp;</div><div id="galDinNavegacionBot05" onclick="galDinCambiarImg(5);">&nbsp;</div>
 		</div>
-	</div>
+	</div> -->
 <?php
 }
 

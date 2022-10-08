@@ -15,20 +15,21 @@ require_once ROOT_PATH.'/app/cfg.php';
 
 $appPath = ROOT_PATH.'/app';
 $ctrlPath = ROOT_PATH.'/app/controller';
+
 require_once $appPath.'/Utils.php';
 require_once $ctrlPath.'/login/LoginCtrl.php';
-require_once $ctrlPath.'/patrocinadores/PatrocinadoresCtrl.php';
+require_once $ctrlPath.'/locutores/LocutoresCtrl.php';
 $loginCtrl = new LoginCtrl();
 
 // comprobando que la sesión esté activa
 $loginCtrl->checkActiveSessionCtrl('login');
 
-$patr = new PatrocinadoresCtrl();
+$locut = new LocutoresCtrl();
 // verificar los permisos que tiene el usuario por comparación bitwise
 $view = ($_SESSION['grupoPermisos'] & 1);
 
-$list = $patr->getAllPatrocinadores();
-$table = $view ? $patr->getTablePatrocinadores($list) : 'No tienes permisos para visualizar los datos.';
+$list = $locut->getAllLocutores();
+$table = $view ? $locut->getTableLocutores($list) : 'No tienes permisos para visualizar los datos.';
 $error = isset($_SESSION["resSubmit"]['error']) ? $_SESSION["resSubmit"]['error'] : null;
 $hide = $error ? '' : 'hide';
 $msg = isset($_SESSION["resSubmit"]['msg']) ? $_SESSION["resSubmit"]['msg'] : null;
@@ -40,7 +41,7 @@ Utils::headPageAdmin();
 <body>
 <?php 
 Utils::getHeaderAdmin('RADIO NEXTLALPAN - management');
-Utils::getNavAdmin('patrocinadores', 'listPatrocinadores');
+Utils::getNavAdmin('locutores', 'listLocutores');
 ?>
 
 <section>
@@ -58,7 +59,7 @@ Utils::getNavAdmin('patrocinadores', 'listPatrocinadores');
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
-					<div class="panel-heading"><strong>Patrocinadores registrados</strong></div>
+					<div class="panel-heading"><strong>Locutores registrados</strong></div>
 					<div class="panel-body">
 						<div class="alert alert-<?php echo $error.' '.$hide; ?>" role="alert">
 							<span class="glyphicon glyphicon-<?php echo $icon; ?>" aria-hidden="true"></span>
@@ -77,14 +78,17 @@ Utils::getNavAdmin('patrocinadores', 'listPatrocinadores');
 <?php Utils::getFooterAdmin(); ?>
 <script>
 $(document).ready(function(){
+  let url_path = "<?php echo URL_PATH; ?>";
+  let urlAjaxAdmin =`${url_path}/php/administracion/ajaxAdmin.php`;
+  console.log("urlAjaxAdmin", urlAjaxAdmin);
 	$('.delete').on('click', function(e){
 		e.preventDefault();
 		console.log('oko');
-		var id = $(this).data('idpatr');
+		let id = $(this).data('idlocut');
 		$.ajax({
 			dataType: "json",
-			data: {'func':'deletePatrocinador', 'param1':id},
-			url:   'ajaxAdmin.php',
+			data: {'func':'deleteLocutor', 'param1':id},
+			url:   urlAjaxAdmin,
 			type:  'post',
 			beforeSend: function(){
 				// lo que se hará antes de mandar la petición ajax

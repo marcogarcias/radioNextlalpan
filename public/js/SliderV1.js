@@ -104,7 +104,7 @@ SliderV1.atShowHide = function(){
 
 /**
  * ocultando las imágenes del sliders
- *
+ * QUITAR SLIDER, YA NO SE USA...
  */
 SliderV1.atOnInit = function(cfg){
 	cfg = cfg || {};

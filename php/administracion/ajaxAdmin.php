@@ -4,10 +4,13 @@ $pathFile = is_dir($serv) ? $serv : $_SERVER['DOCUMENT_ROOT'].'/radioNextlalpan'
 $pathFile = $pathFile.'/app/paths.php';
 require_once $pathFile;*/
 
-if($_SERVER['SERVER_NAME'] == "localhost")
+if($_SERVER['SERVER_NAME'] == "localhost"){
   defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}/radioNextlalpan");
-else
+  defined("URL_PATH") || define('URL_PATH', "http://{$_SERVER['HTTP_HOST']}/radioNextlalpan");
+}else{
   defined("ROOT_PATH") || define('ROOT_PATH', "{$_SERVER['DOCUMENT_ROOT']}");
+  defined("URL_PATH") || define('URL_PATH', "http://{$_SERVER['HTTP_HOST']}");
+}
 
 $func = isset($_POST['func']) && $_POST['func'] ? $_POST['func'] : 'sinDefinir';
 
@@ -29,10 +32,15 @@ function goFunction($func){
 			$json = updateOrderSlider1($_POST['param1'], $_POST['param2']);
 			break;
 
-			case 'deletePatrocinador':
-				$idPatr = isset($_POST['param1']) ? $_POST['param1'] : null;
-				$json = deletePatrocinador($idPatr);
-				break;			
+		case 'deletePatrocinador':
+			$idPatr = isset($_POST['param1']) ? $_POST['param1'] : null;
+			$json = deletePatrocinador($idPatr);
+			break;
+        
+    case 'deleteLocutor':
+      $idPatr = isset($_POST['param1']) ? $_POST['param1'] : null;
+      $json = deleteLocutor($idPatr);
+      break;	
 	
 		default:
 			$json = sinDefinir();
@@ -93,6 +101,23 @@ function deletePatrocinador($idPatr=0){
 		//$res = array('res'=>$res);
 		return $res;
 	}
+}
+
+/**
+  * elimina (logicamente) de la base de datos al patrocinador dado
+  * @param Int $idPatr indica el id del patrocinador a eliminar
+  */
+function deleteLocutor($idLocutor=0){
+  $idLocutor = intval($idLocutor);
+  if($idLocutor){
+    require_once ROOT_PATH.'/app/Utils.php';
+    require_once ROOT_PATH.'/app/controller/locutores/LocutoresCtrl.php';
+
+    $locut = new LocutoresCtrl();
+    $res = $locut->deleteLocutor($idLocutor);
+    //$res = array('res'=>$res);
+    return $res;
+  }
 }
 
 function sinDefinir(){
